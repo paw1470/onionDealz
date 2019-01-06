@@ -19,11 +19,11 @@ public class Event {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name="message_event_type", nullable = false)
+    @Column(name="message_event_type", nullable = false)        //typ eventu
     @Enumerated(EnumType.STRING)
     private MessageEventType eventType;
 
-    @Column(name = "is_read")
+    @Column(name = "is_read")                                   //czy event przeczytany
     private boolean isRead;
 
     private User user;           //if user write or like,

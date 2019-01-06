@@ -18,9 +18,9 @@ public class Shop {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50)         //nazwa sklepu
     private String name;
 
-    @Column(name = "link")
+    @Column(name = "link")                      //link jezeli ma gdzies strone
     private String link;
 }

@@ -20,17 +20,17 @@ public class Comment {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text")                  //tekst komentarza
     private String text;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users")          //lista userow lubiacych komentarz
     private Set<User> likes;
 
-    @Column(name = "add_date")
+    @Column(name = "add_date")              //data dodania
     @Temporal(TemporalType.TIMESTAMP)
     private Date addDate;
 
-    @Column(name = "modify_date")
+    @Column(name = "modify_date")           //data ostatniej modyfikacji
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 }

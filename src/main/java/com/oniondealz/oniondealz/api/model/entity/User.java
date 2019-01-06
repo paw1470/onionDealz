@@ -21,41 +21,41 @@ public class User {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "login", length = 20)
+    @Column(name = "login", length = 20)        //to nie wymaga komentarza
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password")                  //tu bedzie haslo
     private String password;
 
-    @Column(name = "level")
+    @Column(name = "level")                     //level zdobywany przez dobrze oceniane promocje, admin to jakis wysoki numer ktorego nie mozna zdobyc normalnie
     private int level;
 
-    @Column(name = "description")
+    @Column(name = "description")               //opis usera jak ktos chce dodac
     private String description;
 
-    @Column(name = "photo")
+    @Column(name = "photo")                     //link do zdjecia na innej stronie
     private String photo;
 
-    @OneToMany(mappedBy = "coments")
+    @OneToMany(mappedBy = "coments")            //lista wpisanych komentarzy
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "promotions")
+    @OneToMany(mappedBy = "promotions")         //lista polubionych promocji
     private Set<Promotion> liked;
 
-    @OneToMany(mappedBy = "promotions")
+    @OneToMany(mappedBy = "promotions")         //lista nielubianych promocji
     private Set<Promotion> unliked;
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "comments")           //lista polubionych komentarzy
     private Set<Promotion> likedComments;
 
-    @ElementCollection
+    @ElementCollection                          //lista otrzymanych wiadomosci
     @CollectionTable(name = "messages_received", joinColumns = @JoinColumn(name = "id"))
     private ArrayList<String> messagesReceived;
 
-    @ElementCollection
+    @ElementCollection                          //lista wyslanych wiadomosci
     @CollectionTable(name = "messages_send", joinColumns = @JoinColumn(name = "id"))
     private ArrayList<String> messagesSend;
 
-    @OneToMany(mappedBy = "events")
+    @OneToMany(mappedBy = "events")             //eventy (do przemyslenia)
     private Set<Event> events;
 }

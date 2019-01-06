@@ -19,18 +19,18 @@ public class Message {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text")              //tekst wiadomosci
     private String text;
 
-    @JoinColumn(name = "user_from")
+    @JoinColumn(name = "user_from")     //od usera
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User userFrom;
 
-    @JoinColumn(name = "user_to")
+    @JoinColumn(name = "user_to")        //do usera
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User userTo;
 
-    @Column(name = "send_date")
+    @Column(name = "send_date")             //kiedy wyslano
     @Temporal(TemporalType.TIMESTAMP)
     private Date sendDate;
 }
