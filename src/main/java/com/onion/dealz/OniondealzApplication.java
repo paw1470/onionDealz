@@ -1,4 +1,4 @@
-package com.oniondealz.oniondealz;
+package com.onion.dealz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

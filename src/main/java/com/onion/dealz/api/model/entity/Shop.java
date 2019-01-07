@@ -1,4 +1,4 @@
-package com.oniondealz.oniondealz.api.model.entity;
+package com.onion.dealz.api.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

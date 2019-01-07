@@ -1,4 +1,4 @@
-package com.oniondealz.oniondealz.api.model;
+package com.onion.dealz.api.model;
 
 public enum MessageEventType {
     newMessage,

@@ -1,4 +1,4 @@
-package com.oniondealz.oniondealz;
+package com.onion.dealz;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

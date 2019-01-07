@@ -1,11 +1,10 @@
-package com.oniondealz.oniondealz.api.model.entity;
+package com.onion.dealz.api.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
@@ -36,9 +35,9 @@ public class Promotion {
     @Column(name = "shipping_price")            //koszt wysylki
     private double shippingPrice;
 
-    @ElementCollection                          //kupony (zakładam że może być kilka do jednego produktu)
-    @CollectionTable(name = "cupons", joinColumns = @JoinColumn(name = "id"))
-    private ArrayList<String> cupons;
+//    @ElementCollection                          //kupony (zakładam że może być kilka do jednego produktu)
+//    @CollectionTable(name = "cupons", joinColumns = @JoinColumn(name = "id"))
+//    private ArrayList<String> cupons;
 
     @Column(name = "link")                      //link do oferty/sklepu
     private String link;
@@ -66,27 +65,26 @@ public class Promotion {
     @Column(name = "is_ended")                  //zakonczona z jakiegos powodu
     private boolean isEnded;
 
-    @OneToMany(mappedBy = "coments")            //lista komentarzy
+    @OneToMany(mappedBy = "promotion")            //lista komentarzy
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "coments")            //lista osob ktore polubily promocje
+    @ManyToMany(fetch = FetchType.LAZY)           //lista osob ktore polubily promocje
     private Set<User> likes;
 
-    @OneToMany(mappedBy = "coments")            //lista osob ktore nie lubia promocji
+    @ManyToMany(fetch = FetchType.LAZY)             //lista osob ktore nie lubia promocji
     private Set<User> unlikes;
 
-    @ElementCollection                          //lista tagow (do przemyslenia jak to zrobic)
-    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "id"))
-    private ArrayList<String> tags;
-
-    @ElementCollection                          //lista linkow do zdjec(zakladam ze kazde zdjecie bedzie linkiem do zewnetrznej strony)
-    @CollectionTable(name = "photos", joinColumns = @JoinColumn(name = "id"))
-    private ArrayList<String> photos;
+//    @ElementCollection                          //lista tagow (do przemyslenia jak to zrobic)
+//    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "id"))
+//    private ArrayList<String> tags;
+//
+//    @ElementCollection                          //lista linkow do zdjec(zakladam ze kazde zdjecie bedzie linkiem do zewnetrznej strony)
+//    @CollectionTable(name = "photos", joinColumns = @JoinColumn(name = "id"))
+//    private ArrayList<String> photos;
 
     @Column(name = "is_local")                  //czy promocja lokalna
     private boolean isLocal;
 
-    @JoinColumn(name = "shop")                  //sklep w ktorm jest promocja
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 }

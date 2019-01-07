@@ -1,4 +1,4 @@
-package com.oniondealz.oniondealz.api.model.entity;
+package com.onion.dealz.api.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +20,16 @@ public class Comment {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Promotion promotion;
+
     @Column(name = "text")                  //tekst komentarza
     private String text;
 
-    @OneToMany(mappedBy = "users")          //lista userow lubiacych komentarz
+    @ManyToMany(fetch = FetchType.LAZY)          //lista userow lubiacych komentarz
     private Set<User> likes;
 
     @Column(name = "add_date")              //data dodania
