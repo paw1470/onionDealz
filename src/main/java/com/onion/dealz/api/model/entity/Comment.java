@@ -3,6 +3,7 @@ package com.onion.dealz.api.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,16 +21,16 @@ public class Comment {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Promotion promotion;
 
     @Column(name = "text")                  //tekst komentarza
     private String text;
 
-    @ManyToMany(fetch = FetchType.LAZY)          //lista userow lubiacych komentarz
+    @ManyToMany(fetch = FetchType.EAGER)          //lista userow lubiacych komentarz
     private Set<User> likes;
 
     @Column(name = "add_date")              //data dodania
@@ -39,4 +40,17 @@ public class Comment {
     @Column(name = "modify_date")           //data ostatniej modyfikacji
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
+
+    public void update(Comment newComment){
+        this.setText(newComment.getText());
+        this.setModifyDate(newComment.getModifyDate());
+    }
+
+    public void addLike(User user){
+        likes.add(user);
+    }
+
+    public void removeLike(User user){
+        likes.remove(user);
+    }
 }

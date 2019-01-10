@@ -1,13 +1,16 @@
 package com.onion.dealz.api.service;
 
-import com.onion.dealz.api.repository.CommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.onion.dealz.api.model.entity.Comment;
 
-@Service
-public class CommentService {
+import java.util.List;
 
-    @Autowired
-    private CommentRepository commentRepository;
+public interface CommentService {
+
+    public List<Comment> getAllComments();
+    public Comment getByCommentId(Long id);
+    public List<Comment> getAllByUserId(Long id);
+    public void create(Comment comment);
+    public void delete(Comment comment);
+    public void update(Comment comment);
 
 }

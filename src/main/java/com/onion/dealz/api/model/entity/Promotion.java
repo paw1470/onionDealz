@@ -32,6 +32,9 @@ public class Promotion {
     @Column(name = "regular_price")             //normalna cena
     private double regularPrice;
 
+    @Column(name = "saving")
+    private double saving;
+
     @Column(name = "shipping_price")            //koszt wysylki
     private double shippingPrice;
 
@@ -43,7 +46,7 @@ public class Promotion {
     private String link;
 
     @JoinColumn(name = "user")                  //kto dodal
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "add_date")                  //kiedy dodal
@@ -65,7 +68,7 @@ public class Promotion {
     @Column(name = "is_ended")                  //zakonczona z jakiegos powodu
     private boolean isEnded;
 
-    @OneToMany(mappedBy = "promotion")            //lista komentarzy
+    @OneToMany(mappedBy = "promotion", fetch = FetchType.EAGER)            //lista komentarzy
     private Set<Comment> comments;
 
     @ManyToMany(fetch = FetchType.LAZY)           //lista osob ktore polubily promocje
@@ -73,6 +76,16 @@ public class Promotion {
 
     @ManyToMany(fetch = FetchType.LAZY)             //lista osob ktore nie lubia promocji
     private Set<User> unlikes;
+
+    @ManyToMany(fetch = FetchType.LAZY)             //lista osob ktore nie lubia promocji
+    private Set<User> observers;
+
+
+    @Column(name = "is_local")                  //czy promocja lokalna
+    private boolean isLocal;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Shop shop;
 
 //    @ElementCollection                          //lista tagow (do przemyslenia jak to zrobic)
 //    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "id"))
@@ -82,9 +95,46 @@ public class Promotion {
 //    @CollectionTable(name = "photos", joinColumns = @JoinColumn(name = "id"))
 //    private ArrayList<String> photos;
 
-    @Column(name = "is_local")                  //czy promocja lokalna
-    private boolean isLocal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Shop shop;
+
+    public void update(Promotion promotion) {
+        this.title = promotion.getTitle();
+        this.description = promotion.getDescription();
+        this.price = promotion.getPrice();
+        this.regularPrice = promotion.getRegularPrice();
+        this.saving = promotion.getSaving();
+        this.shippingPrice = promotion.getShippingPrice();
+        this.link = promotion.getLink();
+        this.modifyDate = promotion.getModifyDate();
+        this.startDate = promotion.getStartDate();
+        this.endDate = promotion.getEndDate();
+        this.isEnded = promotion.isEnded();
+        this.isLocal = promotion.isLocal();
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
+
+    public void removeComment(Comment comment){
+        this.comments.remove(comment);
+    }
+
+    public void addLike(User user){
+        removeUnlike(user);
+        this.likes.add(user);
+    }
+
+    public void addUnlike(User user){
+        removeLike(user);
+        this.unlikes.add(user);
+    }
+
+    public void removeLike(User user){
+        this.likes.remove(user);
+    }
+
+    public void removeUnlike(User user){
+        this.unlikes.remove(user);
+    }
 }

@@ -23,12 +23,18 @@ public class Message {
     private String text;
 
     @JoinColumn(name = "user_from")     //od usera
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User userFrom;
 
+    @Column(name = "is_fromDeleted")                  //zakonczona z jakiegos powodu
+    private boolean isFromDeleted;
+
     @JoinColumn(name = "user_to")        //do usera
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User userTo;
+
+    @Column(name = "is_toDeleted")                  //zakonczona z jakiegos powodu
+    private boolean isToDeleted;
 
     @Column(name = "send_date")             //kiedy wyslano
     @Temporal(TemporalType.TIMESTAMP)
