@@ -1,6 +1,8 @@
 package com.onion.dealz.api.repository;
 
+import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import com.onion.dealz.api.model.entity.Comment;
+import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +16,13 @@ public interface CommentDao{
     List<Comment> findAllByUserId(Long id);
 
     List<Comment> findAllByPromotionId(Long id);
+    List<User> findAllLikes(Long id);
+
 
     void addComment(Comment comment);
-
     void deleteComment(Comment comment);
+    void updateComment(CommentUpdateDto comment);
 
-    void updateComment(Comment comment);
+    void addLike(Comment comment, User user);
+    void removeLike(Comment comment, User user);
 }

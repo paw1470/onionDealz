@@ -1,5 +1,6 @@
 package com.onion.dealz.api.model.entity;
 
+import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,9 +42,9 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 
-    public void update(Comment newComment){
-        this.setText(newComment.getText());
-        this.setModifyDate(newComment.getModifyDate());
+    public void update(CommentUpdateDto com){
+        this.setText(com.getText());
+        this.setModifyDate(com.getModifyDate());
     }
 
     public void addLike(User user){

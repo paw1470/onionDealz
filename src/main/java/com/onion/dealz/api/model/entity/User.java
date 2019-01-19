@@ -1,13 +1,15 @@
 package com.onion.dealz.api.model.entity;
 
+import com.onion.dealz.api.model.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
-
+@NamedQueries({
+        @NamedQuery(name = "@GET_ALL_USERS", query = "FROM User")
+})
 @Data
 @Entity
 @AllArgsConstructor
@@ -38,27 +40,20 @@ public class User {
     @Column(name = "photo")                     //link do zdjecia na innej stronie
     private String photo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")            //lista wpisanych komentarzy
-    private Set<Comment> comments;
+    public void update(UserDto userDto){
+        this.description = userDto.getDescription();
+        this.photo = userDto.getPhoto();
+    }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")        //lista dodanych promocji
-    private Set<Promotion> addedPromotions;
+    public void levelUp(int value){
+        level += value;
+    }
 
-    @ManyToMany(fetch = FetchType.LAZY)        //lista polubionych promocji
-    private Set<Promotion> likedPromotions;
+    public void levelDown(int value){
+        level -= value;
+    }
 
-    @ManyToMany(fetch = FetchType.LAZY)       //lista nielubianych promocji
-    private Set<Promotion> unlikedPromotions;
-
-    @ManyToMany(fetch = FetchType.LAZY)       //lista polubionych komentarzy
-    private Set<Comment> likedComments;
-
-    @ManyToMany(fetch = FetchType.LAZY)                         //lista otrzymanych wiadomosci
-    private Set<Message> messagesReceived;
-
-    @ManyToMany(fetch = FetchType.LAZY)                          //lista wyslanych wiadomosci
-    private Set<Message> messagesSend;
-
-//    @OneToMany(mappedBy = "events")             //eventy (do przemyslenia)
-//    private Set<Event> events;
+    public void clearLVL(){
+        level = 0;
+    }
 }

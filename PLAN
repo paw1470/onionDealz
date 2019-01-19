@@ -1,0 +1,98 @@
+User może:
+    promocja
+        kazdy
+            pobrać promocje
+                getAll()
+                getById(id)
+            pobrac komentarze do promocji
+                getAllComment(id)
+        kazdy zalogowany
+            dodać komentarz
+                addComment(comment, promo, user)
+                    dodac do komentarzy
+                    dodac do promocji
+                    dodac do usera
+            polubic promocje
+                addLike(user, promo)
+                    removeUnlike(user, promo)
+                    addLike(user, promo)
+            odlubic promocje
+                removeLike(promo, user)
+            unlike promocje
+                addUnlike(promo, user)
+                    removeLike
+                    addUnlike
+
+
+        lvl
+            to co kazdy
+            dodać kupon
+                addKupon(promo, kupon)
+            dopisac cos do tekstu promocji
+                addText(promo, text)
+            wznowić
+                renewPromo(promo)
+            zgłosić nieaktywnosc
+                zglosPromo(promo)
+        wlasciciel
+            edytowac promocje
+            dodać kupon
+                addKupon(promo, kupon)
+            usunac kupon
+                removeKupon(promo, kupon)
+            zmienic link
+                changeLink(promo, link)
+            zmienic tekst
+                changeText
+            wylaczyc promocje
+            wznowic promocje
+        admin
+            to co wlasciciel
+    komentarz
+        kazdy
+            sprawdzic usera
+                user(id).getAllComment
+        po zalogowaniu
+            dodac
+                addComment(promo, coment, user)
+                    addComment
+                    promo.addComment
+                    user.addComment
+        lvl
+        wlasciciel
+            sprawdzic swoje
+                user(id).getAllComment()
+            usunac
+                deleteComment(comment)
+                    usunac z usera i przeniesc komentarz do drugiej tabeli
+            zmienic
+                changeComment(comment)
+                    stary do nowej tabeli a nowy zostaje
+        admin
+    sklep
+        kazdy
+            pobrac
+                getById
+        po zalogowaniu
+            dodac
+                addShop(sklep)
+        lvl
+        wlasciciel
+        admin
+            usunac
+                removeShop(shop)
+            modyfikowac
+                modify(shop)
+    wiadomosc
+        kazdy
+        po zalogowaniu
+            wyslac
+                addMessage(user, user, msg)
+                    dodac do tabeli
+                    dodac do userow
+                    dodac do eventow
+        lvl
+        wlasciciel (odbiorca/nadawca)
+            czytac
+        admin
+

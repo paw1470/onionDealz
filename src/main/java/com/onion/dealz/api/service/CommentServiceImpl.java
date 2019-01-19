@@ -1,7 +1,9 @@
 package com.onion.dealz.api.service;
 
 import com.google.common.collect.Lists;
+import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import com.onion.dealz.api.model.entity.Comment;
+import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.repository.CommentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -36,6 +38,11 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
+    public List<Comment> getAllByPromotionId(Long id) {
+        return this.commentDao.findAllByPromotionId(id);
+    }
+
+    @Override
     public void create(Comment comment){
         commentDao.addComment(comment);
 
@@ -47,8 +54,18 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void update(Comment comment) {
+    public void update(CommentUpdateDto comment) {
         commentDao.updateComment(comment);
+    }
+
+    @Override
+    public void addLike(Comment comment, User user) {
+        commentDao.addLike(comment, user);
+    }
+
+    @Override
+    public void removeLike(Comment comment, User user) {
+        commentDao.removeLike(comment, user);
     }
 
 

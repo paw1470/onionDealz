@@ -32,15 +32,11 @@ public class Promotion {
     @Column(name = "regular_price")             //normalna cena
     private double regularPrice;
 
-    @Column(name = "saving")
-    private double saving;
-
     @Column(name = "shipping_price")            //koszt wysylki
     private double shippingPrice;
 
-//    @ElementCollection                          //kupony (zakładam że może być kilka do jednego produktu)
-//    @CollectionTable(name = "cupons", joinColumns = @JoinColumn(name = "id"))
-//    private ArrayList<String> cupons;
+    @Column(name = "cupon")            //koszt wysylki
+    private String cupon;
 
     @Column(name = "link")                      //link do oferty/sklepu
     private String link;
@@ -68,18 +64,14 @@ public class Promotion {
     @Column(name = "is_ended")                  //zakonczona z jakiegos powodu
     private boolean isEnded;
 
-    @OneToMany(mappedBy = "promotion", fetch = FetchType.EAGER)            //lista komentarzy
-    private Set<Comment> comments;
-
-    @ManyToMany(fetch = FetchType.LAZY)           //lista osob ktore polubily promocje
+    @ManyToMany(fetch = FetchType.EAGER)           //lista osob ktore polubily promocje
     private Set<User> likes;
 
-    @ManyToMany(fetch = FetchType.LAZY)             //lista osob ktore nie lubia promocji
+    @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
     private Set<User> unlikes;
 
-    @ManyToMany(fetch = FetchType.LAZY)             //lista osob ktore nie lubia promocji
+    @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
     private Set<User> observers;
-
 
     @Column(name = "is_local")                  //czy promocja lokalna
     private boolean isLocal;
@@ -87,13 +79,15 @@ public class Promotion {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 
+    @Column(name = "shop_address")
+    private String shopAddress;
+
 //    @ElementCollection                          //lista tagow (do przemyslenia jak to zrobic)
 //    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "id"))
 //    private ArrayList<String> tags;
 //
-//    @ElementCollection                          //lista linkow do zdjec(zakladam ze kazde zdjecie bedzie linkiem do zewnetrznej strony)
-//    @CollectionTable(name = "photos", joinColumns = @JoinColumn(name = "id"))
-//    private ArrayList<String> photos;
+    @Column(name = "photo")
+    private String photo;
 
 
 
@@ -102,7 +96,6 @@ public class Promotion {
         this.description = promotion.getDescription();
         this.price = promotion.getPrice();
         this.regularPrice = promotion.getRegularPrice();
-        this.saving = promotion.getSaving();
         this.shippingPrice = promotion.getShippingPrice();
         this.link = promotion.getLink();
         this.modifyDate = promotion.getModifyDate();
@@ -110,24 +103,17 @@ public class Promotion {
         this.endDate = promotion.getEndDate();
         this.isEnded = promotion.isEnded();
         this.isLocal = promotion.isLocal();
-    }
-
-    public void addComment(Comment comment){
-        this.comments.add(comment);
-    }
-
-    public void removeComment(Comment comment){
-        this.comments.remove(comment);
-    }
-
-    public void addLike(User user){
-        removeUnlike(user);
-        this.likes.add(user);
+        this.shopAddress = promotion.getShopAddress();
     }
 
     public void addUnlike(User user){
         removeLike(user);
         this.unlikes.add(user);
+    }
+
+    public void addLike(User user){
+        removeLike(user);
+        this.likes.add(user);
     }
 
     public void removeLike(User user){

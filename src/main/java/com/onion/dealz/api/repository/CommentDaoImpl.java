@@ -1,6 +1,8 @@
 package com.onion.dealz.api.repository;
 
+import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import com.onion.dealz.api.model.entity.Comment;
+import com.onion.dealz.api.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,7 +16,8 @@ import java.util.Optional;
 @NamedQueries({
         @NamedQuery(name = "@GET_ALL_COMMENTS", query = "FROM Comment"),
         @NamedQuery(name = "@GET_COMMENTS_BY_USER_ID", query = "FROM Comment WHERE user.id =: id"),
-        @NamedQuery(name = "@GET_COMMENTS_BY_PROMOTION_ID", query = "FROM Comment WHERE promotion.id =: id")
+        @NamedQuery(name = "@GET_COMMENTS_BY_PROMOTION_ID", query = "FROM Comment WHERE promotion.id =: id"),
+        @NamedQuery(name = "@GET_USERS_LIKED_COMMENT", query = "FROM User WHERE promotion.id =: id")        //todo nie wiem jakie zapytanie
 })
 public class CommentDaoImpl implements CommentDao{
 
@@ -46,6 +49,13 @@ public class CommentDaoImpl implements CommentDao{
     }
 
     @Override
+    public List<User> findAllLikes(Long id) {
+        return (List<User>) entityManager.createNamedQuery("@GET_USERS_LIKED_COMMENT")
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    @Override
     public void addComment(Comment comment) {
         entityManager.persist(comment);
     }
@@ -56,9 +66,23 @@ public class CommentDaoImpl implements CommentDao{
     }
 
     @Override
-    public void updateComment(Comment comment) {
+    public void updateComment(CommentUpdateDto comment) {
         Comment oldComment = findById(comment.getId());
         oldComment.update(comment);
+        entityManager.flush();
+    }
+
+    @Override
+    public void addLike(Comment comment, User user) {
+        Comment tempComment = findById(comment.getId());
+        tempComment.addLike(user);
+        entityManager.flush();
+    }
+
+    @Override
+    public void removeLike(Comment comment, User user) {
+        Comment tempComment = findById(comment.getId());
+        tempComment.removeLike(user);
         entityManager.flush();
     }
 

@@ -88,7 +88,6 @@ public class PromotionDaoImpl implements PromotionDao{
     @Override
     public void addComment(Promotion promotion, Comment comment) {
         Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.addComment(comment);
         entityManager.flush();
     }
 
@@ -109,7 +108,6 @@ public class PromotionDaoImpl implements PromotionDao{
     @Override
     public void removeComment(Promotion promotion, Comment comment) {
         Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.removeComment(comment);
         entityManager.flush();
     }
 }

@@ -23,4 +23,7 @@ public class Shop {
 
     @Column(name = "link")                      //link jezeli ma gdzies strone
     private String link;
+
+    @Column(name = "country")                      //link jezeli ma gdzies strone
+    private String country;
 }
