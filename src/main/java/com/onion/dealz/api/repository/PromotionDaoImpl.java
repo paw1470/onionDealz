@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 @NamedQueries({
@@ -35,21 +36,21 @@ public class PromotionDaoImpl implements PromotionDao{
 
     @Override
     public List<Promotion> findAllByUserId(Long id) {
-        return (List<Promotion>) entityManager.createNamedQuery("@GET_PROMOTIONS_BY_USER_ID")
+        return entityManager.createNamedQuery("@GET_PROMOTIONS_BY_USER_ID")
                 .setParameter("id", id)
                 .getResultList();
     }
 
     @Override
     public List<Promotion> findAllByShopId(Long id) {
-        return (List<Promotion>) entityManager.createNamedQuery("@GET_PROMOTIONS_BY_SHOP_ID")
+        return entityManager.createNamedQuery("@GET_PROMOTIONS_BY_SHOP_ID")
                 .setParameter("id", id)
                 .getResultList();
     }
 
     @Override
     public List<Promotion> findAllByTagId(Long id) {
-        return (List<Promotion>) entityManager.createNamedQuery("@GET_PROMOTIONS_BY_TAG_ID")
+        return entityManager.createNamedQuery("@GET_PROMOTIONS_BY_TAG_ID")
                 .setParameter("id", id)
                 .getResultList();
     }

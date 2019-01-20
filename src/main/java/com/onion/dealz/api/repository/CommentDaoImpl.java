@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 @NamedQueries({
@@ -36,21 +37,21 @@ public class CommentDaoImpl implements CommentDao{
 
     @Override
     public List<Comment> findAllByUserId(Long id) {
-        return (List<Comment>) entityManager.createNamedQuery("@GET_COMMENTS_BY_USER_ID")
+        return entityManager.createNamedQuery("@GET_COMMENTS_BY_USER_ID")
                 .setParameter("id", id)
                 .getResultList();
     }
 
     @Override
     public List<Comment> findAllByPromotionId(Long id) {
-        return (List<Comment>) entityManager.createNamedQuery("@GET_COMMENTS_BY_PROMOTION_ID")
+        return entityManager.createNamedQuery("@GET_COMMENTS_BY_PROMOTION_ID")
                 .setParameter("id", id)
                 .getResultList();
     }
 
     @Override
     public List<User> findAllLikes(Long id) {
-        return (List<User>) entityManager.createNamedQuery("@GET_USERS_LIKED_COMMENT")
+        return entityManager.createNamedQuery("@GET_USERS_LIKED_COMMENT")
                 .setParameter("id", id)
                 .getResultList();
     }

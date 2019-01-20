@@ -9,7 +9,7 @@ public class CommentUpdateDto {
 
     private Long id;
 
-    String text;
+    private String text;
 
     private Date modifyDate;
 }

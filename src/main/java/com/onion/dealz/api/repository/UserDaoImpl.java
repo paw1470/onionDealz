@@ -8,6 +8,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 
@@ -22,11 +23,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
-    }
-
-    @Override
     public List<User> findAllByName(String name) {
         return null;
     }
@@ -37,12 +33,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(User user) {
-
+    public void deleteUser(Long id) {
+        entityManager.remove(id);
     }
 
     @Override
     public void updateUser(User user) {
+        entityManager.flush();
+    }
 
+    @Override
+    public User findByName(String name) {
+        return entityManager.find(User.class, name);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return entityManager.find(User.class, id);
     }
 }

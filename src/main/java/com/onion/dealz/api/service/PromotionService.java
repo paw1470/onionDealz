@@ -5,6 +5,7 @@ import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PromotionService {
 

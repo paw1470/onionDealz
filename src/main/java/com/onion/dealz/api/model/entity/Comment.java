@@ -8,6 +8,7 @@ import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -32,7 +33,7 @@ public class Comment {
     private String text;
 
     @ManyToMany(fetch = FetchType.EAGER)          //lista userow lubiacych komentarz
-    private Set<User> likes;
+    private List<User> likes;
 
     @Column(name = "add_date")              //data dodania
     @Temporal(TemporalType.TIMESTAMP)

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -61,17 +62,17 @@ public class Promotion {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @Column(name = "is_ended")                  //zakonczona z jakiegos powodu
-    private boolean isEnded;
-
     @ManyToMany(fetch = FetchType.EAGER)           //lista osob ktore polubily promocje
-    private Set<User> likes;
+    private List<User> likes;
 
     @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
-    private Set<User> unlikes;
+    private List<User> unlikes;
 
     @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
-    private Set<User> observers;
+    private List<User> observers;
+
+    @Column(name = "is_active")
+    private boolean isActive;
 
     @Column(name = "is_local")                  //czy promocja lokalna
     private boolean isLocal;
@@ -101,7 +102,7 @@ public class Promotion {
         this.modifyDate = promotion.getModifyDate();
         this.startDate = promotion.getStartDate();
         this.endDate = promotion.getEndDate();
-        this.isEnded = promotion.isEnded();
+        this.isActive = promotion.isActive();
         this.isLocal = promotion.isLocal();
         this.shopAddress = promotion.getShopAddress();
     }
@@ -112,7 +113,7 @@ public class Promotion {
     }
 
     public void addLike(User user){
-        removeLike(user);
+        removeUnlike(user);
         this.likes.add(user);
     }
 

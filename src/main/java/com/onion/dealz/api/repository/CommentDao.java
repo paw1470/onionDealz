@@ -6,6 +6,7 @@ import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface CommentDao{

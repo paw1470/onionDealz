@@ -4,6 +4,7 @@ import com.onion.dealz.api.model.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface UserDao{
@@ -15,7 +16,9 @@ public interface UserDao{
 
     void create(User user);
 
-    void deleteUser(User user);
+    void deleteUser(Long id);
 
     void updateUser(User user);
+
+    User findByName(String name);
 }

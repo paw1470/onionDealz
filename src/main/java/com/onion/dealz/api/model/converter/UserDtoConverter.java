@@ -1,6 +1,7 @@
 package com.onion.dealz.api.model.converter;
 
 import com.onion.dealz.api.model.dto.UserDto;
+import com.onion.dealz.api.model.dto.UserRegistrationDto;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.ArrayList;
@@ -24,6 +25,15 @@ public class UserDtoConverter {
         user.setLevel(userDto.getLevel());
         user.setDescription(userDto.getDescription());
         user.setPhoto(userDto.getPhoto());
+        return user;
+    }
+
+    public User dtoRegistrationToEntity(UserRegistrationDto userRegistrationDto){
+        User user = new User();
+        user.setLogin(userRegistrationDto.getLogin());
+        user.setPassword(userRegistrationDto.getPassword());
+        user.setDescription(userRegistrationDto.getDescription());
+        user.setPhoto(userRegistrationDto.getPhoto());
         return user;
     }
 
