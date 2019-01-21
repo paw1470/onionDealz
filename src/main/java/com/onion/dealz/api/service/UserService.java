@@ -2,6 +2,7 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.dto.CommentDto;
 import com.onion.dealz.api.model.entity.Comment;
+import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
@@ -13,11 +14,12 @@ public interface UserService {
     public List<User> getAllByName(String name);
 
     public void create(User user);
-    public void delete(Long id);
+    public void delete(User user);
     public void update(User user);
 
     public User getByUserName(String name);
 
     List<Comment> getComments(User user);
 
+    List<Promotion> getPromotions(User user);
 }

@@ -6,20 +6,10 @@ import com.onion.dealz.api.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Repository
-@NamedQueries({
-        @NamedQuery(name = "@GET_ALL_COMMENTS", query = "FROM Comment"),
-        @NamedQuery(name = "@GET_COMMENTS_BY_USER_ID", query = "FROM Comment WHERE user.id =: id"),
-        @NamedQuery(name = "@GET_COMMENTS_BY_PROMOTION_ID", query = "FROM Comment WHERE promotion.id =: id"),
-        @NamedQuery(name = "@GET_USERS_LIKED_COMMENT", query = "FROM User WHERE promotion.id =: id")        //todo nie wiem jakie zapytanie
-})
 public class CommentDaoImpl implements CommentDao{
 
     @PersistenceContext

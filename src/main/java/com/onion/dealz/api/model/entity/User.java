@@ -1,6 +1,7 @@
 package com.onion.dealz.api.model.entity;
 
 import com.onion.dealz.api.model.dto.UserDto;
+import com.onion.dealz.api.model.dto.UserPasswordDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = "@GET_ALL_USERS", query = "FROM User")
+        @NamedQuery(name = "@GET_ALL_USERS", query = "FROM User"),
+        @NamedQuery(name = "@GET_USER_BY_NAME", query = "FROM User WHERE login =: name"),
+        @NamedQuery(name = "@GET_ALL_USERS_BY_NAME", query = "FROM User WHERE login LIKE CONCAT('%',:name,'%')")
 })
 @Data
 @Entity
@@ -22,7 +25,7 @@ public class User {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "login", length = 20)        //to nie wymaga komentarza
+    @Column(name = "login", length = 20, unique = true, nullable = false)        //to nie wymaga komentarza
     private String login;
 
     @Column(name = "password")                  //tu bedzie haslo
@@ -55,5 +58,13 @@ public class User {
 
     public void clearLVL(){
         level = 0;
+    }
+
+    public boolean updatePassword(UserPasswordDto userPasswordDto) {
+        if(login.equals(userPasswordDto.getLogin())){
+            this.password = userPasswordDto.getPassword();
+            return true;
+        }
+        return false;
     }
 }

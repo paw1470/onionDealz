@@ -2,6 +2,7 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.dto.CommentDto;
 import com.onion.dealz.api.model.entity.Comment;
+import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private PromotionService promotionService;
 
 
     @Override
@@ -43,8 +47,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void delete(Long id) {
-        this.userDao.deleteUser(id);
+    public void delete(User user) {
+        this.userDao.deleteUser(user);
     }
 
     @Override
@@ -61,5 +65,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Comment> getComments(User user) {
         return this.commentService.getAllByUserId(user.getId());
+    }
+
+    @Override
+    public List<Promotion> getPromotions(User user) {
+        return this.promotionService.getAllByUserId(user.getId());
     }
 }

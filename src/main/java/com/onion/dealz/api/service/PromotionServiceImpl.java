@@ -1,18 +1,23 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.repository.PromotionDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
+@Transactional
 @Service
 public class PromotionServiceImpl implements PromotionService{
 
+    @Autowired
     private PromotionDao promotionDao;
 
     @Cacheable
@@ -53,7 +58,7 @@ public class PromotionServiceImpl implements PromotionService{
     }
 
     @Override
-    public void update(Promotion promotion) {
+    public void update(PromotionDto promotion) {
         promotionDao.updatePromotion(promotion);
     }
 

@@ -9,16 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Transactional
 @Service
 public class CommentServiceImpl implements CommentService{
 
     @Autowired
     private CommentDao commentDao;
-    private PromotionService promotionService;
 
     @Cacheable
     @Override

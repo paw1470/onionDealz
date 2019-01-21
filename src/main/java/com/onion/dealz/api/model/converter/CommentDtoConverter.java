@@ -25,13 +25,13 @@ public class CommentDtoConverter {
         return commentDto;
     }
 
-    public Comment dtoAddToEntity(CommentDto commentDto, User user, Promotion promotion, Date date){
+    public Comment dtoAddToEntity(CommentDto commentDto, User user, Promotion promotion){
         Comment comment = new Comment();
         comment.setId(commentDto.getId());
         comment.setUser(user);
         comment.setPromotion(promotion);
         comment.setText(commentDto.getText());
-        comment.setAddDate(date);
+        comment.setAddDate(commentDto.getAddDate());
         return comment;
     }
 

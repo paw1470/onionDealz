@@ -4,11 +4,8 @@ import com.onion.dealz.api.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 
@@ -24,7 +21,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllByName(String name) {
-        return null;
+        return entityManager.createNamedQuery("@GET_ALL_USERS_BY_NAME").
+                setParameter("name", name).
+                getResultList();
     }
 
     @Override
@@ -33,8 +32,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(Long id) {
-        entityManager.remove(id);
+    public void deleteUser(User user) {
+        entityManager.remove(user);
     }
 
     @Override
@@ -44,7 +43,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByName(String name) {
-        return entityManager.find(User.class, name);
+        List<User> users = entityManager.createNamedQuery("@GET_USER_BY_NAME").
+                setParameter("name", name).
+                getResultList();
+        for(User u: users){
+            if(u.getLogin().equals(name)){
+                return u;
+            }
+        }
+        return null;
     }
 
     @Override

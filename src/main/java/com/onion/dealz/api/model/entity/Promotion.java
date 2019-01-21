@@ -1,5 +1,6 @@
 package com.onion.dealz.api.model.entity;
 
+import com.onion.dealz.api.model.dto.PromotionDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "@GET_ALL_PROMOTIONS", query = "FROM Promotion"),
+        @NamedQuery(name = "@GET_PROMOTIONS_BY_USER_ID", query = "FROM Promotion WHERE user.id =: id"),
+        @NamedQuery(name = "@GET_PROMOTIONS_BY_SHOP_ID", query = "FROM Promotion WHERE shop.id =: id")
+//        @NamedQuery(name = "@GET_USERS_LIKED_PROMOTION", query = "FROM User WHERE promotion.id =: id")        //todo nie wiem jakie zapytanie
+})
 @Data
 @Entity
 @AllArgsConstructor
@@ -42,8 +48,7 @@ public class Promotion {
     @Column(name = "link")                      //link do oferty/sklepu
     private String link;
 
-    @JoinColumn(name = "user")                  //kto dodal
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "add_date")                  //kiedy dodal
@@ -62,13 +67,13 @@ public class Promotion {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)           //lista osob ktore polubily promocje
+    @ManyToMany(cascade = { CascadeType.ALL})           //lista osob ktore polubily promocje
     private List<User> likes;
 
-    @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
+    @ManyToMany(cascade = { CascadeType.ALL})             //lista osob ktore nie lubia promocji
     private List<User> unlikes;
 
-    @ManyToMany(fetch = FetchType.EAGER)             //lista osob ktore nie lubia promocji
+    @ManyToMany(cascade = { CascadeType.ALL})             //lista osob ktore nie lubia promocji
     private List<User> observers;
 
     @Column(name = "is_active")
@@ -92,19 +97,20 @@ public class Promotion {
 
 
 
-    public void update(Promotion promotion) {
-        this.title = promotion.getTitle();
-        this.description = promotion.getDescription();
-        this.price = promotion.getPrice();
-        this.regularPrice = promotion.getRegularPrice();
-        this.shippingPrice = promotion.getShippingPrice();
-        this.link = promotion.getLink();
-        this.modifyDate = promotion.getModifyDate();
-        this.startDate = promotion.getStartDate();
-        this.endDate = promotion.getEndDate();
-        this.isActive = promotion.isActive();
-        this.isLocal = promotion.isLocal();
-        this.shopAddress = promotion.getShopAddress();
+    public void update(PromotionDto promotionDto) {
+        this.title = promotionDto.getTitle();
+        this.description = promotionDto.getDescription();
+        this.price = promotionDto.getPrice();
+        this.regularPrice = promotionDto.getRegularPrice();
+        this.shippingPrice = promotionDto.getShippingPrice();
+        this.cupon = promotionDto.getCupon();
+        this.link = promotionDto.getLink();
+        this.modifyDate = promotionDto.getModifyDate();
+        this.startDate = promotionDto.getStartDate();
+        this.endDate = promotionDto.getEndDate();
+        this.isActive = promotionDto.isActive();
+        this.isLocal = promotionDto.isLocal();
+        this.shopAddress = promotionDto.getShopAddress();
     }
 
     public void addUnlike(User user){

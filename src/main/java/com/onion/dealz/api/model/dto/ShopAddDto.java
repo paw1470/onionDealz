@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopDto {
-    private Long id;
+public class ShopAddDto {
     private String name;
     private String link;
     private String country;

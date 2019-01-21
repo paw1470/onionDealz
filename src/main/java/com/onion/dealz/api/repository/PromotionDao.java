@@ -1,5 +1,6 @@
 package com.onion.dealz.api.repository;
 
+import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
@@ -19,7 +20,7 @@ public interface PromotionDao{
 
     void addPromotion(Promotion promotion);
     void deletePromotion(Promotion promotion);
-    void updatePromotion(Promotion promotion);
+    void updatePromotion(PromotionDto promotion);
 
     void addLike(Promotion promotion, User user);
     void addUnlike(Promotion promotion, User user);

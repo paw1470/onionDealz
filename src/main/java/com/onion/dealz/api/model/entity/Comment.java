@@ -4,13 +4,17 @@ import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "@GET_ALL_COMMENTS", query = "FROM Comment"),
+        @NamedQuery(name = "@GET_COMMENTS_BY_USER_ID", query = "FROM Comment WHERE user.id =: id"),
+        @NamedQuery(name = "@GET_COMMENTS_BY_PROMOTION_ID", query = "FROM Comment WHERE promotion.id =: id")
+//        @NamedQuery(name = "@GET_USERS_LIKED_COMMENT", query = "FROM User WHERE likes.id =: id")        //todo nie wiem jakie zapytanie
+})
 @Data
 @Entity
 @AllArgsConstructor

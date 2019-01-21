@@ -1,24 +1,16 @@
 package com.onion.dealz.api.repository;
 
+import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Repository
-@NamedQueries({
-        @NamedQuery(name = "@GET_ALL_PROMOTIONS", query = "FROM Promotion"),
-        @NamedQuery(name = "@GET_PROMOTIONS_BY_USER_ID", query = "FROM Promotion WHERE user.id =: id"),
-        @NamedQuery(name = "@GET_PROMOTIONS_BY_SHOP_ID", query = "FROM Promotion WHERE shop.id =: id"),
-        @NamedQuery(name = "@GET_PROMOTIONS_BY_TAG_ID", query = "FROM Promotion WHERE tag.id =: id")
-})
 public class PromotionDaoImpl implements PromotionDao{
 
     @PersistenceContext
@@ -66,7 +58,7 @@ public class PromotionDaoImpl implements PromotionDao{
     }
 
     @Override
-    public void updatePromotion(Promotion promotion) {
+    public void updatePromotion(PromotionDto promotion) {
         Promotion oldPromotion = findById(promotion.getId());
         oldPromotion.update(promotion);
         entityManager.flush();
