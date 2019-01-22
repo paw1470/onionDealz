@@ -2,7 +2,6 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.converter.PromotionDtoConverter;
 import com.onion.dealz.api.model.dto.PromotionDto;
-import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.Shop;
 import com.onion.dealz.api.model.entity.User;

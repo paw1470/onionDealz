@@ -18,16 +18,6 @@ public class UserDtoConverter {
         return userDto;
     }
 
-//    public User dtoToEntity(UserDto userDto){
-//        User user = new User();
-//        user.setId(userDto.getId());
-//        user.setLogin(userDto.getLogin());
-//        user.setLevel(userDto.getLevel());
-//        user.setDescription(userDto.getDescription());
-//        user.setPhoto(userDto.getPhoto());
-//        return user;
-//    }
-
     public User dtoRegistrationToEntity(UserRegistrationDto userRegistrationDto){
         User user = new User();
         user.setLogin(userRegistrationDto.getLogin());
@@ -36,14 +26,6 @@ public class UserDtoConverter {
         user.setPhoto(userRegistrationDto.getPhoto());
         return user;
     }
-
-//    public List<User> dtoToEntityList(List<UserDto> userDtos){
-//        List<User> users = new ArrayList();
-//        for (UserDto u:userDtos) {
-//            users.add(dtoToEntity(u));
-//        }
-//        return users;
-//    }
 
     public List<UserDto> entityToDtoList(List<User> users){
         List<UserDto> userDtos = new ArrayList();

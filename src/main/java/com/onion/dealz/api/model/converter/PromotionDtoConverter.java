@@ -7,7 +7,6 @@ import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.utils.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PromotionDtoConverter {

@@ -24,16 +24,16 @@ public class Shop {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "name", length = 50)         //nazwa sklepu
+    @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "link")                      //link jezeli ma gdzies strone
+    @Column(name = "link")
     private String link;
 
-    @Column(name = "country")                      //link jezeli ma gdzies strone
+    @Column(name = "country")
     private String country;
 
-    @Column(name = "description")                      //link jezeli ma gdzies strone
+    @Column(name = "description")
     private String description;
 
     public void update(ShopDto shopDto){

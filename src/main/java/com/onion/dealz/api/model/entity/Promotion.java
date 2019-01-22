@@ -28,59 +28,59 @@ public class Promotion {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "title", length = 50)        //tytul promocji
+    @Column(name = "title", length = 50)
     private String title;
 
-    @Column(name = "description")                //opis promocji
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "price")                     //aktualna cena
+    @Column(name = "price")
     private double price;
 
-    @Column(name = "regular_price")             //normalna cena
+    @Column(name = "regular_price")
     private double regularPrice;
 
-    @Column(name = "shipping_price")            //koszt wysylki
+    @Column(name = "shipping_price")
     private double shippingPrice;
 
-    @Column(name = "cupon")            //koszt wysylki
+    @Column(name = "cupon")
     private String cupon;
 
-    @Column(name = "link")                      //link do oferty/sklepu
+    @Column(name = "link")
     private String link;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @Column(name = "add_date")                  //kiedy dodal
+    @Column(name = "add_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date addDate;
 
-    @Column(name = "modify_date")               //ostatnia modyfikacja
+    @Column(name = "modify_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 
-    @Column(name = "start_date")                //data rozpoczecia promocji (mozna wstawic wczesniej)
+    @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
-    @Column(name = "end_date")                  //data zakonczenia promocji(nic nie trwa wiecznie)
+    @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @ManyToMany(cascade = { CascadeType.ALL})           //lista osob ktore polubily promocje
+    @ManyToMany(cascade = { CascadeType.ALL})
     private List<User> likes;
 
-    @ManyToMany(cascade = { CascadeType.ALL})             //lista osob ktore nie lubia promocji
+    @ManyToMany(cascade = { CascadeType.ALL})
     private List<User> unlikes;
 
-    @ManyToMany(cascade = { CascadeType.ALL})             //lista osob ktore nie lubia promocji
+    @ManyToMany(cascade = { CascadeType.ALL})
     private List<User> observers;
 
     @Column(name = "is_active")
     private boolean isActive;
 
-    @Column(name = "is_local")                  //czy promocja lokalna
+    @Column(name = "is_local")
     private boolean isLocal;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -89,10 +89,6 @@ public class Promotion {
     @Column(name = "shop_address")
     private String shopAddress;
 
-//    @ElementCollection                          //lista tagow (do przemyslenia jak to zrobic)
-//    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "id"))
-//    private ArrayList<String> tags;
-//
     @Column(name = "photo")
     private String photo;
 

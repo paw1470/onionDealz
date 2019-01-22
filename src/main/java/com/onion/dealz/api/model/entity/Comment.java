@@ -14,7 +14,6 @@ import java.util.List;
         @NamedQuery(name = "@GET_ALL_COMMENTS", query = "FROM Comment"),
         @NamedQuery(name = "@GET_COMMENTS_BY_USER_ID", query = "FROM Comment WHERE user.id =: id"),
         @NamedQuery(name = "@GET_COMMENTS_BY_PROMOTION_ID", query = "FROM Comment WHERE promotion.id =: id")
-//        @NamedQuery(name = "@GET_USERS_LIKED_COMMENT", query = "FROM User WHERE likes.id =: id")        //todo nie wiem jakie zapytanie
 })
 @Data
 @Entity
@@ -34,17 +33,17 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Promotion promotion;
 
-    @Column(name = "text")                  //tekst komentarza
+    @Column(name = "text")
     private String text;
 
-    @ManyToMany(cascade = { CascadeType.ALL})            //lista userow lubiacych komentarz
+    @ManyToMany(cascade = { CascadeType.ALL})
     private List<User> likes;
 
-    @Column(name = "add_date")              //data dodania
+    @Column(name = "add_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date addDate;
 
-    @Column(name = "modify_date")           //data ostatniej modyfikacji
+    @Column(name = "modify_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 

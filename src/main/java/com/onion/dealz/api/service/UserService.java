@@ -1,8 +1,6 @@
 package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.dto.*;
-import com.onion.dealz.api.model.entity.Comment;
-import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;

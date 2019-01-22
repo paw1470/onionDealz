@@ -1,8 +1,6 @@
 package com.onion.dealz.api.model.converter;
 
-import com.onion.dealz.api.model.dto.ShopAddDto;
 import com.onion.dealz.api.model.dto.ShopDto;
-import com.onion.dealz.api.model.dto.UserDto;
 import com.onion.dealz.api.model.entity.Shop;
 
 import java.util.ArrayList;

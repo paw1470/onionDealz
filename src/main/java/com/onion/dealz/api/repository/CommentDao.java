@@ -1,12 +1,8 @@
 package com.onion.dealz.api.repository;
 
-import com.onion.dealz.api.model.dto.CommentUpdateDto;
 import com.onion.dealz.api.model.entity.Comment;
-import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 
 public interface CommentDao {

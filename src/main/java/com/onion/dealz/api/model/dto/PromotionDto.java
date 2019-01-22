@@ -1,11 +1,8 @@
 package com.onion.dealz.api.model.dto;
 
-import com.onion.dealz.api.repository.ShopDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @NoArgsConstructor

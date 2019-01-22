@@ -25,22 +25,25 @@ public class User {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "login", length = 20, unique = true, nullable = false)        //to nie wymaga komentarza
+    @Column(name = "login", length = 20, unique = true, nullable = false)
     private String login;
 
-    @Column(name = "password")                  //tu bedzie haslo
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "level")                     //level zdobywany przez dobrze oceniane promocje, admin to jakis wysoki numer ktorego nie mozna zdobyc normalnie
+    @Column(name = "level")
     private int level;
 
-    @Column(name = "is_admin")                  //czy jest adminem
+    @Column(name = "is_admin")
     private boolean isAdmin;
 
-    @Column(name = "description")               //opis usera jak ktos chce dodac
+    @Column(name = "is_upgraded")
+    private boolean isUpgraded;
+
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "photo")                     //link do zdjecia na innej stronie
+    @Column(name = "photo")
     private String photo;
 
     public void update(UserDto userDto){

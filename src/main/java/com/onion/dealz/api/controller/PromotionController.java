@@ -1,11 +1,7 @@
 package com.onion.dealz.api.controller;
 
-import com.onion.dealz.api.model.converter.PromotionDtoConverter;
 import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.service.PromotionService;
-import com.onion.dealz.api.service.ShopService;
-import com.onion.dealz.api.service.UserService;
-import com.onion.dealz.api.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +14,6 @@ public class PromotionController {
 
     @Autowired
     private PromotionService promotionService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ShopService shopService;
-
-    private DateUtils dateUtils = new DateUtils();
-    private PromotionDtoConverter promotionDtoConverter = new PromotionDtoConverter();
 
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)

@@ -2,8 +2,6 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.converter.UserDtoConverter;
 import com.onion.dealz.api.model.dto.*;
-import com.onion.dealz.api.model.entity.Comment;
-import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;

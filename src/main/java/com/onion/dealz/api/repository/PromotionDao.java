@@ -1,13 +1,10 @@
 package com.onion.dealz.api.repository;
 
-import com.onion.dealz.api.model.dto.PromotionDto;
-import com.onion.dealz.api.model.entity.Comment;
+
 import com.onion.dealz.api.model.entity.Promotion;
-import com.onion.dealz.api.model.entity.User;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Set;
+
 
 
 public interface PromotionDao{
@@ -22,11 +19,4 @@ public interface PromotionDao{
     void deletePromotion(Promotion promotion);
     void updatePromotion(Promotion promotion);
 
-//    void addLike(Promotion promotion, User user);
-//    void addUnlike(Promotion promotion, User user);
-//    void addComment(Promotion promotion, Comment comment);
-//
-//    void removeLike(Promotion promotion, User user);
-//    void removeUnlike(Promotion promotion, User user);
-//    void removeComment(Promotion promotion, Comment comment);
 }

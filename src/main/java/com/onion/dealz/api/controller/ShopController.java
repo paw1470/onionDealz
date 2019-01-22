@@ -1,6 +1,5 @@
 package com.onion.dealz.api.controller;
 
-import com.onion.dealz.api.model.converter.ShopDtoConverter;
 import com.onion.dealz.api.model.dto.ShopDto;
 import com.onion.dealz.api.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ public class ShopController {
 
     @Autowired
     private ShopService shopService;
-
-    private ShopDtoConverter shopDtoConverter = new ShopDtoConverter();
 
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
