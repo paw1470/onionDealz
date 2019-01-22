@@ -61,44 +61,44 @@ public class PromotionDaoImpl implements PromotionDao{
     public void updatePromotion(Promotion promotion) {
         entityManager.flush();
     }
-
-    @Override
-    public void addLike(Promotion promotion, User user) {
-        Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.addLike(user);
-        entityManager.flush();
-    }
-
-    @Override
-    public void addUnlike(Promotion promotion, User user) {
-        Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.addUnlike(user);
-        entityManager.flush();
-    }
-
-    @Override
-    public void addComment(Promotion promotion, Comment comment) {
-        Promotion tempPromotion = findById(promotion.getId());
-        entityManager.flush();
-    }
-
-    @Override
-    public void removeLike(Promotion promotion, User user) {
-        Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.removeLike(user);
-        entityManager.flush();
-    }
-
-    @Override
-    public void removeUnlike(Promotion promotion, User user) {
-        Promotion tempPromotion = findById(promotion.getId());
-        tempPromotion.removeUnlike(user);
-        entityManager.flush();
-    }
-
-    @Override
-    public void removeComment(Promotion promotion, Comment comment) {
-        Promotion tempPromotion = findById(promotion.getId());
-        entityManager.flush();
-    }
+//
+//    @Override
+//    public void addLike(Promotion promotion, User user) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        tempPromotion.addLike(user);
+//        entityManager.flush();
+//    }
+//
+//    @Override
+//    public void addUnlike(Promotion promotion, User user) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        tempPromotion.addUnlike(user);
+//        entityManager.flush();
+//    }
+//
+//    @Override
+//    public void addComment(Promotion promotion, Comment comment) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        entityManager.flush();
+//    }
+//
+//    @Override
+//    public void removeLike(Promotion promotion, User user) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        tempPromotion.removeLike(user);
+//        entityManager.flush();
+//    }
+//
+//    @Override
+//    public void removeUnlike(Promotion promotion, User user) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        tempPromotion.removeUnlike(user);
+//        entityManager.flush();
+//    }
+//
+//    @Override
+//    public void removeComment(Promotion promotion, Comment comment) {
+//        Promotion tempPromotion = findById(promotion.getId());
+//        entityManager.flush();
+//    }
 }

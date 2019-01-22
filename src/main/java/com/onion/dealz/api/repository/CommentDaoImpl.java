@@ -39,12 +39,12 @@ public class CommentDaoImpl implements CommentDao{
                 .getResultList();
     }
 
-    @Override
-    public List<User> findAllLikes(Long id) {
-        return entityManager.createNamedQuery("@GET_USERS_LIKED_COMMENT")
-                .setParameter("id", id)
-                .getResultList();
-    }
+//    @Override
+//    public List<User> findAllLikes(Long id) {
+//        return entityManager.createNamedQuery("@GET_USERS_LIKED_COMMENT")
+//                .setParameter("id", id)
+//                .getResultList();
+//    }
 
     @Override
     public void addComment(Comment comment) {
@@ -60,20 +60,4 @@ public class CommentDaoImpl implements CommentDao{
     public void updateComment(Comment comment) {
         entityManager.flush();
     }
-
-    @Override
-    public void addLike(Comment comment, User user) {
-        Comment tempComment = findById(comment.getId());
-        tempComment.addLike(user);
-        entityManager.flush();
-    }
-
-    @Override
-    public void removeLike(Comment comment, User user) {
-        Comment tempComment = findById(comment.getId());
-        tempComment.removeLike(user);
-        entityManager.flush();
-    }
-
-
 }

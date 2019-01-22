@@ -6,25 +6,24 @@ import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface PromotionService {
 
-    public List<Promotion> getAllPromotions();
-    public Promotion getByPromotionId(Long id);
-    public List<Promotion> getAllByUserId(Long id);
-    public List<Promotion> getAllByShopId(Long id);
-    public List<Promotion> getAllByTagId(Long id);
+    public List<PromotionDto> getAllPromotions();
+    public PromotionDto getPromotionById(Long id);
+    public List<PromotionDto> getAllByUserId(Long id);
+    public List<PromotionDto> getAllByShopId(Long id);
+    public List<PromotionDto> getAllByTagId(Long id);
 
-    public void create(Promotion promotion);
-    public void delete(Promotion promotion);
-    public void update(Promotion promotion);
+    public PromotionDto create(PromotionDto promotionDto);
+    public void delete(Long id);
+    public PromotionDto update(Long id, PromotionDto promotionDto);
 
-    public void addLike(Promotion promotion, User user);
-    public void addUnlike(Promotion promotion, User user);
-    public void addComment(Promotion promotion, Comment comment);
+    public void addLike(Long id);
+    public void addUnlike(Long id);
 
-    public void removeLike(Promotion promotion, User user);
-    public void removeUnlike(Promotion promotion, User user);
-    public void removeComment(Promotion promotion, Comment comment);
+    public void removeLike(Long id);
+    public void removeUnlike(Long id);
+
+    public Promotion getPromotionByIdEntity(Long id);
 }

@@ -55,6 +55,11 @@ public class Comment {
     }
 
     public void addLike(User user){
+        for(User u:likes){
+            if(u.getId() == user.getId()){
+                return;
+            }
+        }
         likes.add(user);
     }
 

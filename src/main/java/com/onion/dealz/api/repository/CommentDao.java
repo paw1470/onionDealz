@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 
-public interface CommentDao{
+public interface CommentDao {
     List<Comment> findAllComments();
 
     Comment findById(Long id);
@@ -17,13 +17,12 @@ public interface CommentDao{
     List<Comment> findAllByUserId(Long id);
 
     List<Comment> findAllByPromotionId(Long id);
-    List<User> findAllLikes(Long id);
 
+//    List<User> findAllLikes(Long id);
 
     void addComment(Comment comment);
-    void deleteComment(Comment comment);
-    void updateComment(Comment comment);
 
-    void addLike(Comment comment, User user);
-    void removeLike(Comment comment, User user);
+    void deleteComment(Comment comment);
+
+    void updateComment(Comment comment);
 }

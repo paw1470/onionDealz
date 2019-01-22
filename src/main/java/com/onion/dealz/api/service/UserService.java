@@ -1,25 +1,28 @@
 package com.onion.dealz.api.service;
 
-import com.onion.dealz.api.model.dto.CommentDto;
+import com.onion.dealz.api.model.dto.*;
 import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserService {
-    public List<User> getAllUsers();
-    public User getByUserId(Long id);
-    public List<User> getAllByName(String name);
+    public List<UserDto> getAllUsers();
+    public UserDto getByUserId(Long id);
+    public List<UserDto> getAllByName(String name);
 
-    public void create(User user);
-    public void delete(User user);
-    public void update(User user);
+    public UserDto create(UserRegistrationDto userRegistrationDto);
+    public void delete(Long id);
+    public UserDto update(Long id, UserDto userDto);
 
-    public User getByUserName(String name);
+    public UserDto getByUserName(String name);
 
-    List<Comment> getComments(User user);
+    public List<CommentDto> getComments(String name);
 
-    List<Promotion> getPromotions(User user);
+    public List<PromotionDto> getPromotions(String name);
+
+    public UserDto updatePassword(Long id, UserPasswordDto userPasswordDto);
+
+    public User getByUserIdEntity(Long id);
 }

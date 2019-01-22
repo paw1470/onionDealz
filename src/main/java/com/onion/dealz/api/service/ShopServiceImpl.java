@@ -1,5 +1,7 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.model.converter.ShopDtoConverter;
+import com.onion.dealz.api.model.dto.ShopDto;
 import com.onion.dealz.api.model.entity.Shop;
 import com.onion.dealz.api.repository.ShopDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,38 +17,58 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopDao shopDao;
 
+    ShopDtoConverter shopDtoConverter = new ShopDtoConverter();
+
     @Override
-    public List<Shop> getAllShops() {
-        return this.shopDao.findAllShops();
+    public List<ShopDto> getAllShops() {
+        List<Shop> shops = shopDao.findAllShops();
+        List<ShopDto> shopDtos = shopDtoConverter.entityToDtoList(shops);
+        return shopDtos;
     }
 
     @Override
-    public Shop getByShopId(Long id) {
-        return this.shopDao.findById(id);
+    public ShopDto getByShopId(Long id) {
+        Shop shop = shopDao.findById(id);
+        ShopDto shopDto = shopDtoConverter.entityToDto(shop);
+        return shopDto;
     }
 
     @Override
-    public List<Shop> getAllByName(String name) {
-        return this.shopDao.findAllByName(name);
+    public Shop getByShopIdEntity(Long id) {
+        return shopDao.findById(id);
     }
 
     @Override
-    public void create(Shop shop) {
-        this.shopDao.create(shop);
+    public List<ShopDto> getAllByName(String name) {
+        List<ShopDto> shopDtos = shopDtoConverter.entityToDtoList(shopDao.findAllByName(name));
+        return shopDtos;
     }
 
     @Override
-    public void delete(Shop shop) {
-        this.shopDao.deleteShop(shop);
+    public ShopDto create(ShopDto shopDto) {
+        Shop shop = shopDtoConverter.dtoAddToEntity(shopDto);
+        shopDao.create(shop);
+        ShopDto shopDtoNew = shopDtoConverter.entityToDto(shopDao.findById(shop.getId()));
+        return shopDtoNew;
     }
 
     @Override
-    public void update(Shop shop) {
-        this.shopDao.updateShop(shop);
+    public void delete(Long id) {
+        Shop shop = shopDao.findById(id);
+        shopDao.deleteShop(shop);
     }
 
     @Override
-    public Shop getByShopName(String name) {
-        return this.shopDao.findByName(name);
+    public ShopDto update(Long id, ShopDto shopDto) {
+        Shop shop = shopDao.findById(id);
+        shop.update(shopDto);
+        shopDao.updateShop(shop);
+        ShopDto shopDtoNew = shopDtoConverter.entityToDto(shopDao.findById(id));
+        return shopDtoNew;
+    }
+
+    @Override
+    public ShopDto getByShopName(String name) {
+        return shopDtoConverter.entityToDto(shopDao.findByName(name));
     }
 }

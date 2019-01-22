@@ -115,11 +115,21 @@ public class Promotion {
 
     public void addUnlike(User user){
         removeLike(user);
+        for(User u:unlikes){
+            if(u.getId() == user.getId()){
+                return;
+            }
+        }
         this.unlikes.add(user);
     }
 
     public void addLike(User user){
         removeUnlike(user);
+        for(User u:likes){
+            if(u.getId() == user.getId()){
+                return;
+            }
+        }
         this.likes.add(user);
     }
 

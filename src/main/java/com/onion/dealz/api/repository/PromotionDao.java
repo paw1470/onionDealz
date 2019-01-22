@@ -22,11 +22,11 @@ public interface PromotionDao{
     void deletePromotion(Promotion promotion);
     void updatePromotion(Promotion promotion);
 
-    void addLike(Promotion promotion, User user);
-    void addUnlike(Promotion promotion, User user);
-    void addComment(Promotion promotion, Comment comment);
-
-    void removeLike(Promotion promotion, User user);
-    void removeUnlike(Promotion promotion, User user);
-    void removeComment(Promotion promotion, Comment comment);
+//    void addLike(Promotion promotion, User user);
+//    void addUnlike(Promotion promotion, User user);
+//    void addComment(Promotion promotion, Comment comment);
+//
+//    void removeLike(Promotion promotion, User user);
+//    void removeUnlike(Promotion promotion, User user);
+//    void removeComment(Promotion promotion, Comment comment);
 }
