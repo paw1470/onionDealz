@@ -57,9 +57,7 @@ public class CommentDaoImpl implements CommentDao{
     }
 
     @Override
-    public void updateComment(CommentUpdateDto comment) {
-        Comment oldComment = findById(comment.getId());
-        oldComment.update(comment);
+    public void updateComment(Comment comment) {
         entityManager.flush();
     }
 

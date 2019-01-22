@@ -17,7 +17,7 @@ public interface CommentService {
 
     public void create(Comment comment);
     public void delete(Comment comment);
-    public void update(CommentUpdateDto comment);
+    public void update(Comment comment);
 
     public void addLike(Comment comment, User user);
     public void removeLike(Comment comment, User user);

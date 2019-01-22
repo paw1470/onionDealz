@@ -58,9 +58,7 @@ public class PromotionDaoImpl implements PromotionDao{
     }
 
     @Override
-    public void updatePromotion(PromotionDto promotion) {
-        Promotion oldPromotion = findById(promotion.getId());
-        oldPromotion.update(promotion);
+    public void updatePromotion(Promotion promotion) {
         entityManager.flush();
     }
 

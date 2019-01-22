@@ -78,6 +78,7 @@ public class UserController {
     UserDto updateUser(@RequestBody UserDto userDto, @PathVariable("name") String name){
         User user = userService.getByUserName(name);
         user.update(userDto);
+        userService.update(user);
         UserDto userDtoNew = userDtoConverter.entityToDto(userService.getByUserName(name));
         return userDtoNew;
     }

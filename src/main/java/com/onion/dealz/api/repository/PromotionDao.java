@@ -20,7 +20,7 @@ public interface PromotionDao{
 
     void addPromotion(Promotion promotion);
     void deletePromotion(Promotion promotion);
-    void updatePromotion(PromotionDto promotion);
+    void updatePromotion(Promotion promotion);
 
     void addLike(Promotion promotion, User user);
     void addUnlike(Promotion promotion, User user);

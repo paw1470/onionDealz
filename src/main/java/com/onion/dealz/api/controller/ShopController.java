@@ -51,6 +51,7 @@ public class ShopController {
     ShopDto updateShop(@RequestBody ShopDto shopDto, @PathVariable("id") Long id){
         Shop shop = shopService.getByShopId(id);
         shop.update(shopDto);
+        shopService.update(shop);
         ShopDto shopDtoNew = shopDtoConverter.entityToDto(shopService.getByShopId(id));
         return shopDtoNew;
     }

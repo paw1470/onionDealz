@@ -58,7 +58,7 @@ public class PromotionServiceImpl implements PromotionService{
     }
 
     @Override
-    public void update(PromotionDto promotion) {
+    public void update(Promotion promotion) {
         promotionDao.updatePromotion(promotion);
     }
 

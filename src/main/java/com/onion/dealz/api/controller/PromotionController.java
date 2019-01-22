@@ -45,7 +45,7 @@ public class PromotionController {
     PromotionDto create(@RequestBody PromotionDto promotionDto){
         if(promotionDto.getDescription().length()>5){
             User user = userService.getByUserId(Long.valueOf(1));
-            Shop shop = shopService.getByShopId(Long.valueOf(1));
+            Shop shop = shopService.getByShopId(promotionDto.getShop().getId());
             Promotion promotion = promotionDtoConverter.dtoAddToEntity(promotionDto, user, shop);
             promotionService.create(promotion);
             PromotionDto promotionDtoNew = promotionDtoConverter.entityToDto(promotionService.getByPromotionId(promotion.getId()));
@@ -76,6 +76,7 @@ public class PromotionController {
     PromotionDto updatePromotion(@RequestBody PromotionDto promotionDto, @PathVariable("id") Long id ){
         Promotion promotion = promotionService.getByPromotionId(id);
         promotion.update(promotionDto);
+        promotionService.update(promotion);
         PromotionDto promotionDtoNew = promotionDtoConverter.entityToDto(promotionService.getByPromotionId(id));
         return promotionDtoNew;
     }

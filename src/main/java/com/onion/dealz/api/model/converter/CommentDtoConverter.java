@@ -19,7 +19,7 @@ public class CommentDtoConverter {
         commentDto.setUser(userDtoConverter.entityToDto(comment.getUser()));
         commentDto.setPromotion(promotionDtoConverter.entityToDto(comment.getPromotion()));
         commentDto.setText(comment.getText());
-        commentDto.setLikes(userDtoConverter.entityToDtoList((List<User>) comment.getLikes()));
+        commentDto.setLikes(comment.getLikes().size());
         commentDto.setAddDate(comment.getAddDate());
         commentDto.setModifyDate(comment.getModifyDate());
         return commentDto;
@@ -32,6 +32,7 @@ public class CommentDtoConverter {
         comment.setPromotion(promotion);
         comment.setText(commentDto.getText());
         comment.setAddDate(commentDto.getAddDate());
+        comment.setLikes(new ArrayList<>());
         return comment;
     }
 

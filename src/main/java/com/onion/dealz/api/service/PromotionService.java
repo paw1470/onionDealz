@@ -18,7 +18,7 @@ public interface PromotionService {
 
     public void create(Promotion promotion);
     public void delete(Promotion promotion);
-    public void update(PromotionDto promotion);
+    public void update(Promotion promotion);
 
     public void addLike(Promotion promotion, User user);
     public void addUnlike(Promotion promotion, User user);

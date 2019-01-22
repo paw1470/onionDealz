@@ -56,7 +56,7 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void update(CommentUpdateDto comment) {
+    public void update(Comment comment) {
         commentDao.updateComment(comment);
     }
 

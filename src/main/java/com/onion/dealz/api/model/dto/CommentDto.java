@@ -15,7 +15,7 @@ public class CommentDto {
     private UserDto user;
     private PromotionDto promotion;
     private String text;
-    private List<UserDto> likes;
+    private int likes;
     private Date addDate;
     private Date modifyDate;
 }

@@ -22,7 +22,7 @@ public interface CommentDao{
 
     void addComment(Comment comment);
     void deleteComment(Comment comment);
-    void updateComment(CommentUpdateDto comment);
+    void updateComment(Comment comment);
 
     void addLike(Comment comment, User user);
     void removeLike(Comment comment, User user);

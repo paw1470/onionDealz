@@ -36,7 +36,7 @@ public class Comment {
     @Column(name = "text")                  //tekst komentarza
     private String text;
 
-    @ManyToMany(fetch = FetchType.EAGER)          //lista userow lubiacych komentarz
+    @ManyToMany(cascade = { CascadeType.ALL})            //lista userow lubiacych komentarz
     private List<User> likes;
 
     @Column(name = "add_date")              //data dodania
