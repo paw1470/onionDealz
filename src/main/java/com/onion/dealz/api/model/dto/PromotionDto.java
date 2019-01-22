@@ -20,10 +20,10 @@ public class PromotionDto {
     private String cupon;
     private String link;
     private UserDto user;
-    private Date addDate;
-    private Date modifyDate;
-    private Date startDate;
-    private Date endDate;
+    private String addDate;
+    private String modifyDate;
+    private String startDate;
+    private String endDate;
     private int likes;
     private int unlikes;
     private boolean isActive;

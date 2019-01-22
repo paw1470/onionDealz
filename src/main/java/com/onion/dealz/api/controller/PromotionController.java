@@ -8,6 +8,7 @@ import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.service.PromotionService;
 import com.onion.dealz.api.service.ShopService;
 import com.onion.dealz.api.service.UserService;
+import com.onion.dealz.api.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class PromotionController {
     @Autowired
     private ShopService shopService;
 
-
+    private DateUtils dateUtils = new DateUtils();
     private PromotionDtoConverter promotionDtoConverter = new PromotionDtoConverter();
 
     @GetMapping("/all")

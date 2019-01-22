@@ -1,6 +1,7 @@
 package com.onion.dealz.api.model.entity;
 
 import com.onion.dealz.api.model.dto.CommentUpdateDto;
+import com.onion.dealz.api.utils.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,8 +49,9 @@ public class Comment {
     private Date modifyDate;
 
     public void update(CommentUpdateDto com){
+        DateUtils dateUtils = new DateUtils();
         this.setText(com.getText());
-        this.setModifyDate(com.getModifyDate());
+        this.setModifyDate(dateUtils.getCurrentDateTime());
     }
 
     public void addLike(User user){

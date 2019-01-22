@@ -4,13 +4,16 @@ import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.Shop;
 import com.onion.dealz.api.model.entity.User;
+import com.onion.dealz.api.utils.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PromotionDtoConverter {
-    UserDtoConverter userDtoConverter = new UserDtoConverter();
-    ShopDtoConverter shopDtoConverter = new ShopDtoConverter();
+    private UserDtoConverter userDtoConverter = new UserDtoConverter();
+    private ShopDtoConverter shopDtoConverter = new ShopDtoConverter();
+    private DateUtils dateUtils = new DateUtils();
 
     public PromotionDto entityToDto(Promotion promotion) {
         PromotionDto promotionDto = new PromotionDto();
@@ -23,10 +26,13 @@ public class PromotionDtoConverter {
         promotionDto.setCupon(promotion.getCupon());
         promotionDto.setLink(promotion.getLink());
         promotionDto.setUser(userDtoConverter.entityToDto(promotion.getUser()));
-        promotionDto.setAddDate(promotion.getAddDate());
-        promotionDto.setModifyDate(promotion.getModifyDate());
-        promotionDto.setStartDate(promotion.getStartDate());
-        promotionDto.setEndDate(promotion.getEndDate());
+        promotionDto.setAddDate(dateUtils.dateToString(promotion.getAddDate()));
+        if(promotion.getModifyDate() != null)
+            promotionDto.setModifyDate(dateUtils.dateToString(promotion.getModifyDate()));
+        if(promotion.getStartDate() != null)
+            promotionDto.setStartDate(dateUtils.dateToString(promotion.getStartDate()));
+        if(promotion.getEndDate() != null)
+            promotionDto.setEndDate(dateUtils.dateToString(promotion.getEndDate()));
         promotionDto.setLikes(promotion.getLikes().size());
         promotionDto.setUnlikes(promotion.getUnlikes().size());
         promotionDto.setActive(promotion.isActive());
@@ -47,9 +53,9 @@ public class PromotionDtoConverter {
         promotion.setCupon(promotionDto.getCupon());
         promotion.setLink(promotionDto.getLink());
         promotion.setUser(user);
-        promotion.setAddDate(promotionDto.getAddDate());
-        promotion.setStartDate(promotionDto.getStartDate());
-        promotion.setEndDate(promotionDto.getEndDate());
+        promotion.setAddDate(dateUtils.getCurrentDateTime());
+        promotion.setStartDate(dateUtils.stringToDate(promotionDto.getStartDate()));
+        promotion.setEndDate(dateUtils.stringToDate(promotionDto.getEndDate()));
         promotion.setLikes(new ArrayList<>());
         promotion.setUnlikes(new ArrayList<>());
         promotion.setObservers(new ArrayList<>());

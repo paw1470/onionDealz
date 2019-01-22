@@ -11,5 +11,5 @@ public class CommentUpdateDto {
 
     private String text;
 
-    private Date modifyDate;
+    private String modifyDate;
 }

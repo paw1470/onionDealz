@@ -4,6 +4,7 @@ import com.onion.dealz.api.model.dto.CommentDto;
 import com.onion.dealz.api.model.entity.Comment;
 import com.onion.dealz.api.model.entity.Promotion;
 import com.onion.dealz.api.model.entity.User;
+import com.onion.dealz.api.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 public class CommentDtoConverter {
     private UserDtoConverter userDtoConverter = new UserDtoConverter();
     private PromotionDtoConverter promotionDtoConverter = new PromotionDtoConverter();
+    private DateUtils dateUtils = new DateUtils();
 
     public CommentDto entityToDto(Comment comment){
         CommentDto commentDto = new CommentDto();
@@ -20,8 +22,9 @@ public class CommentDtoConverter {
         commentDto.setPromotion(promotionDtoConverter.entityToDto(comment.getPromotion()));
         commentDto.setText(comment.getText());
         commentDto.setLikes(comment.getLikes().size());
-        commentDto.setAddDate(comment.getAddDate());
-        commentDto.setModifyDate(comment.getModifyDate());
+        commentDto.setAddDate(dateUtils.dateToString(comment.getAddDate()));
+        if(comment.getModifyDate() != null)
+            commentDto.setModifyDate(dateUtils.dateToString(comment.getModifyDate()));
         return commentDto;
     }
 
@@ -31,7 +34,7 @@ public class CommentDtoConverter {
         comment.setUser(user);
         comment.setPromotion(promotion);
         comment.setText(commentDto.getText());
-        comment.setAddDate(commentDto.getAddDate());
+        comment.setAddDate(dateUtils.getCurrentDateTime());
         comment.setLikes(new ArrayList<>());
         return comment;
     }

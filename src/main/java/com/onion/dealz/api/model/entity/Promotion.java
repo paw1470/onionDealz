@@ -1,6 +1,7 @@
 package com.onion.dealz.api.model.entity;
 
 import com.onion.dealz.api.model.dto.PromotionDto;
+import com.onion.dealz.api.utils.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,11 +61,11 @@ public class Promotion {
     private Date modifyDate;
 
     @Column(name = "start_date")                //data rozpoczecia promocji (mozna wstawic wczesniej)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
     @Column(name = "end_date")                  //data zakonczenia promocji(nic nie trwa wiecznie)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
     @ManyToMany(cascade = { CascadeType.ALL})           //lista osob ktore polubily promocje
@@ -95,9 +96,8 @@ public class Promotion {
     @Column(name = "photo")
     private String photo;
 
-
-
     public void update(PromotionDto promotionDto) {
+        DateUtils dateUtils = new DateUtils();
         this.title = promotionDto.getTitle();
         this.description = promotionDto.getDescription();
         this.price = promotionDto.getPrice();
@@ -105,9 +105,9 @@ public class Promotion {
         this.shippingPrice = promotionDto.getShippingPrice();
         this.cupon = promotionDto.getCupon();
         this.link = promotionDto.getLink();
-        this.modifyDate = promotionDto.getModifyDate();
-        this.startDate = promotionDto.getStartDate();
-        this.endDate = promotionDto.getEndDate();
+        this.modifyDate = dateUtils.getCurrentDateTime();
+        this.startDate = dateUtils.stringToDate(promotionDto.getStartDate());
+        this.endDate = dateUtils.stringToDate(promotionDto.getEndDate());
         this.isActive = promotionDto.isActive();
         this.isLocal = promotionDto.isLocal();
         this.shopAddress = promotionDto.getShopAddress();
