@@ -49,28 +49,28 @@ public class PromotionController {
         return promotionDtoNew;
     }
 
-    @PostMapping("/{id}/like")
+    @PostMapping("/{promotionId}/like/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void addLike(@PathVariable("id") Long id ){
-        promotionService.addLike(id);
+    void addLike(@PathVariable("promotionId") Long promotionId, @PathVariable("userId") Long userId ){
+        promotionService.addLike(promotionId, userId);
     }
 
-    @PostMapping("/{id}/removelike")
+    @PostMapping("/{promotionId}/removelike/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void removeLink(@PathVariable("id") Long id ){
-        promotionService.removeLike(id);
+    void removeLink(@PathVariable("promotionId") Long promotionId , @PathVariable("userId") Long userId ){
+        promotionService.removeLike(promotionId, userId);
     }
 
-    @PostMapping("/{id}/unlike")
+    @PostMapping("/{promotionId}/unlike/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void addUnlike(@PathVariable("id") Long id ){
-        promotionService.addUnlike(id);
+    void addUnlike(@PathVariable("promotionId") Long promotionId , @PathVariable("userId") Long userId ){
+        promotionService.addUnlike(promotionId, userId);
     }
 
-    @PostMapping("/{id}/removeunlike")
+    @PostMapping("/{promotionId}/removeunlike/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void removeUnlike(@PathVariable("id") Long id ){
-        promotionService.removeUnlike(id);
+    void removeUnlike(@PathVariable("promotionId") Long promotionId , @PathVariable("userId") Long userId ){
+        promotionService.removeUnlike(promotionId, userId);
     }
 
 

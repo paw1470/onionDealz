@@ -5,8 +5,7 @@ import com.onion.dealz.api.model.dto.*;
 import com.onion.dealz.api.model.entity.User;
 import com.onion.dealz.api.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -107,8 +106,8 @@ public class UserServiceImpl implements UserService{
         return this.userDao.findById(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        return userDao.findByName(name);
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+//        return userDao.findByName(name);
+//    }
 }

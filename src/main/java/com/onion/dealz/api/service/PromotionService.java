@@ -17,11 +17,11 @@ public interface PromotionService {
     public void delete(Long id);
     public PromotionDto update(Long id, PromotionDto promotionDto);
 
-    public void addLike(Long id);
-    public void addUnlike(Long id);
+    public void addLike(Long promotionId, Long userId);
+    public void addUnlike(Long promotionId, Long userId);
 
-    public void removeLike(Long id);
-    public void removeUnlike(Long id);
+    public void removeLike(Long promotionId, Long userId);
+    public void removeUnlike(Long promotionId, Long userId);
 
     public Promotion getPromotionByIdEntity(Long id);
 }

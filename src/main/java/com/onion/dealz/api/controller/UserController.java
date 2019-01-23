@@ -31,17 +31,17 @@ public class UserController {
         return userDtos;
     }
 
-    @PostMapping("/auth/registration")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    UserDto create(@RequestBody UserRegistrationDto userRegistrationDto){
-        UserDto userDto = userService.create(userRegistrationDto);
-        return userDto;
-    }
-
     @GetMapping("/{name}")
     @ResponseStatus(value = HttpStatus.OK)
     UserDto getByName(@PathVariable("name") String name){
         UserDto userDto = userService.getByUserName(name);
+        return userDto;
+    }
+
+    @PostMapping("/auth/registration")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    UserDto create(@RequestBody UserRegistrationDto userRegistrationDto){
+        UserDto userDto = userService.create(userRegistrationDto);
         return userDto;
     }
 
@@ -51,10 +51,10 @@ public class UserController {
         userService.delete(id);
     }
 
-    @PutMapping("/auth/update")
+    @PutMapping("/auth/{id}/update")
     @ResponseStatus(value = HttpStatus.OK)
-    UserDto updateUser(@RequestBody UserDto userDto){
-       UserDto userDtoNew = userService.update(Long.valueOf(1), userDto);
+    UserDto updateUser(@RequestBody UserDto userDto, @PathVariable("id") Long id){
+       UserDto userDtoNew = userService.update(id, userDto);            //todo
        return userDtoNew;
     }
 

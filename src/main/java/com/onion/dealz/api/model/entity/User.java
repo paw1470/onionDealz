@@ -5,13 +5,10 @@ import com.onion.dealz.api.model.dto.UserPasswordDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
+
 
 @NamedQueries({
         @NamedQuery(name = "@GET_ALL_USERS", query = "FROM User"),
@@ -23,7 +20,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Users")
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -80,45 +77,45 @@ public class User implements UserDetails {
         return false;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (isAdmin) {
-            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else if(isUpgraded){
-            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_MOD"));
-        }
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getUsername() {
-        return this.login;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        if (isAdmin) {
+//            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+//        } else if(isUpgraded){
+//            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_MOD"));
+//        }
+//        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return this.login;
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return this.password;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 
     
 }

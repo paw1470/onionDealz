@@ -65,7 +65,7 @@ public class PromotionServiceImpl implements PromotionService{
 
     @Override
     public PromotionDto create(PromotionDto promotionDto) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1));   //todo poprawic jak bedzie autoryzacja
+        User user = userService.getByUserIdEntity(promotionDto.getUser().getId());   //todo poprawic jak bedzie autoryzacja
         Shop shop = shopService.getByShopIdEntity(promotionDto.getShop().getId());
         Promotion promotion = promotionDtoConverter.dtoAddToEntity(promotionDto, user, shop);
         promotionDao.addPromotion(promotion);
@@ -89,34 +89,34 @@ public class PromotionServiceImpl implements PromotionService{
     }
 
     @Override
-    public void addLike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1));   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(id);
+    public void addLike(Long promotionId, Long userId) {
+        User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
+        Promotion promotion = promotionDao.findById(promotionId);
         promotion.addLike(user);
         promotionDao.updatePromotion(promotion);
     }
 
     @Override
-    public void addUnlike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1));   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(id);
+    public void addUnlike(Long promotionId, Long userId) {
+        User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
+        Promotion promotion = promotionDao.findById(promotionId);
         promotion.addUnlike(user);
         promotionDao.updatePromotion(promotion);
     }
 
 
     @Override
-    public void removeLike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1));   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(id);
+    public void removeLike(Long promotionId, Long userId) {
+        User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
+        Promotion promotion = promotionDao.findById(promotionId);
         promotion.removeLike(user);
         promotionDao.updatePromotion(promotion);
     }
 
     @Override
-    public void removeUnlike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1));   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(id);
+    public void removeUnlike(Long promotionId, Long userId) {
+        User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
+        Promotion promotion = promotionDao.findById(promotionId);
         promotion.removeUnlike(user);
         promotionDao.updatePromotion(promotion);
     }

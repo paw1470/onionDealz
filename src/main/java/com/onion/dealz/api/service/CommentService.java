@@ -17,6 +17,6 @@ public interface CommentService {
     public void delete(Long id);
     public CommentDto update(Long id, CommentUpdateDto commentUpdateDto);
 
-    public void addLike(Long id);
-    public void removeLike(Long id);
+    public void addLike(Long commentId, Long userId);
+    public void removeLike(Long commentId, Long userId);
 }

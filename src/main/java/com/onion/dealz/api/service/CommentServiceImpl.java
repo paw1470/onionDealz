@@ -63,7 +63,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public CommentDto create(CommentDto commentDto){  //todo dodac usera jak vedzie autoryzacja
         Promotion promotion = promotionService.getPromotionByIdEntity(commentDto.getPromotion().getId());
-        User user = userService.getByUserIdEntity(Long.valueOf(1)); //todo dodac usera jak bedzie autoryzacja
+        User user = userService.getByUserIdEntity(commentDto.getUser().getId()); //todo dodac usera jak bedzie autoryzacja
         Comment comment = commentDtoConverter.dtoAddToEntity(commentDto, user, promotion);
         commentDao.addComment(comment);
         CommentDto commentDtoNew = commentDtoConverter.entityToDto(commentDao.findById(comment.getId()));
@@ -86,17 +86,17 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void addLike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1)); //todo dodac usera jak bedzie autoryzacja
-        Comment comment = commentDao.findById(id);
+    public void addLike(Long commentId, Long userId) {
+        User user = userService.getByUserIdEntity(userId); //todo dodac usera jak bedzie autoryzacja
+        Comment comment = commentDao.findById(commentId);
         comment.addLike(user);
         commentDao.updateComment(comment);
     }
 
     @Override
-    public void removeLike(Long id) {
-        User user = userService.getByUserIdEntity(Long.valueOf(1)); //todo dodac usera jak bedzie autoryzacja
-        Comment comment = commentDao.findById(id);
+    public void removeLike(Long commentId, Long userId) {
+        User user = userService.getByUserIdEntity(userId); //todo dodac usera jak bedzie autoryzacja
+        Comment comment = commentDao.findById(commentId);
         comment.removeLike(user);
         commentDao.updateComment(comment);
     }

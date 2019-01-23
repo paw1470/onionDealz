@@ -38,10 +38,10 @@ public class CommentController {
         return commentDtos;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{commentId}")
     @ResponseStatus(value = HttpStatus.OK)
-    CommentDto getById(@PathVariable("id") Long id){
-        CommentDto commentDto = commentService.getByCommentId(id);
+    CommentDto getById(@PathVariable("commentId") Long commentId){
+        CommentDto commentDto = commentService.getByCommentId(commentId);
         return commentDto;
     }
 
@@ -52,28 +52,28 @@ public class CommentController {
         return commentDtoNew;
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{commentId}/delete")
     @ResponseStatus(value = HttpStatus.OK)
-    void deleteComment(@PathVariable("id") Long id){
-        commentService.delete(id);
+    void deleteComment(@PathVariable("commentId") Long commentId){
+        commentService.delete(commentId);
     }
 
-    @PutMapping("/{id}/update")
+    @PutMapping("/{commentId}/update")
     @ResponseStatus(value = HttpStatus.OK)
-    CommentDto updateComment(@RequestBody CommentUpdateDto commentUpdateDto, @PathVariable("id") Long id){
-        CommentDto commentDtoNew = commentService.update(id, commentUpdateDto);
+    CommentDto updateComment(@RequestBody CommentUpdateDto commentUpdateDto, @PathVariable("commentId") Long commentId){
+        CommentDto commentDtoNew = commentService.update(commentId, commentUpdateDto);
         return commentDtoNew;
     }
 
-    @PostMapping("/{id}/like")
+    @PostMapping("/{commentId}/like/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void like(@PathVariable("id") Long id){
-        commentService.addLike(id);
+    void like(@PathVariable("commentId") Long commentId, @PathVariable("userId") Long userId){
+        commentService.addLike(commentId, userId);
     }
 
-    @PostMapping("/{id}/removelike")
+    @PostMapping("/{commentId}/removelike{userId}")
     @ResponseStatus(value = HttpStatus.OK)
-    void removelike(@PathVariable("id") Long id){
-        commentService.removeLike(id);
+    void removelike(@PathVariable("commentId") Long commentId, @PathVariable("userId") Long userId){
+        commentService.removeLike(commentId, userId);
     }
 }
