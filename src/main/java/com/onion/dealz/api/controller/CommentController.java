@@ -71,7 +71,7 @@ public class CommentController {
         commentService.addLike(commentId, userId);
     }
 
-    @PostMapping("/{commentId}/removelike{userId}")
+    @PostMapping("/{commentId}/removelike/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
     void removelike(@PathVariable("commentId") Long commentId, @PathVariable("userId") Long userId){
         commentService.removeLike(commentId, userId);
