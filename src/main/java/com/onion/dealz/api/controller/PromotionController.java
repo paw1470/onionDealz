@@ -36,38 +36,38 @@ public class PromotionController {
         return promotionDto;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     @ResponseStatus(value = HttpStatus.OK)
     void deletePromotion(@PathVariable("id") Long id){
         promotionService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     @ResponseStatus(value = HttpStatus.OK)
     PromotionDto updatePromotion(@RequestBody PromotionDto promotionDto, @PathVariable("id") Long id ){
         PromotionDto promotionDtoNew = promotionService.update(id, promotionDto);
         return promotionDtoNew;
     }
 
-    @PutMapping("/{id}/like")
+    @PostMapping("/{id}/like")
     @ResponseStatus(value = HttpStatus.OK)
     void addLike(@PathVariable("id") Long id ){
         promotionService.addLike(id);
     }
 
-    @PutMapping("/{id}/removelike")
+    @PostMapping("/{id}/removelike")
     @ResponseStatus(value = HttpStatus.OK)
     void removeLink(@PathVariable("id") Long id ){
         promotionService.removeLike(id);
     }
 
-    @PutMapping("/{id}/unlike")
+    @PostMapping("/{id}/unlike")
     @ResponseStatus(value = HttpStatus.OK)
     void addUnlike(@PathVariable("id") Long id ){
         promotionService.addUnlike(id);
     }
 
-    @PutMapping("/{id}/removeunlike")
+    @PostMapping("/{id}/removeunlike")
     @ResponseStatus(value = HttpStatus.OK)
     void removeUnlike(@PathVariable("id") Long id ){
         promotionService.removeUnlike(id);

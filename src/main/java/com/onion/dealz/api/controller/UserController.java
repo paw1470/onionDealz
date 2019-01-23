@@ -31,7 +31,7 @@ public class UserController {
         return userDtos;
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/auth/registration")
     @ResponseStatus(value = HttpStatus.CREATED)
     UserDto create(@RequestBody UserRegistrationDto userRegistrationDto){
         UserDto userDto = userService.create(userRegistrationDto);
@@ -45,20 +45,20 @@ public class UserController {
         return userDto;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/auth/{id}/delete")
     @ResponseStatus(value = HttpStatus.OK)
     void deleteUser(@PathVariable("id") Long id){
         userService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/auth/update")
     @ResponseStatus(value = HttpStatus.OK)
-    UserDto updateUser(@RequestBody UserDto userDto, @PathVariable("id") Long id){
-       UserDto userDtoNew = userService.update(id, userDto);
+    UserDto updateUser(@RequestBody UserDto userDto){
+       UserDto userDtoNew = userService.update(Long.valueOf(1), userDto);
        return userDtoNew;
     }
 
-    @PutMapping("/{id}/password")
+    @PutMapping("/auth/{id}/password")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     UserDto updateUserPass(@RequestBody UserPasswordDto userPasswordDto, @PathVariable("id") Long id){
         UserDto userDto = userService.updatePassword(id, userPasswordDto);

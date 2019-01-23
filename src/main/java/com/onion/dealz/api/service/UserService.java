@@ -2,10 +2,11 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.dto.*;
 import com.onion.dealz.api.model.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     public List<UserDto> getAllUsers();
     public UserDto getByUserId(Long id);
     public List<UserDto> getAllByName(String name);

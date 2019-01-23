@@ -19,5 +19,4 @@ public interface CommentService {
 
     public void addLike(Long id);
     public void removeLike(Long id);
-
 }

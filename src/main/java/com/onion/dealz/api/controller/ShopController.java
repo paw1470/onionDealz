@@ -29,13 +29,13 @@ public class ShopController {
         return shopDtoNew;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     @ResponseStatus(value = HttpStatus.OK)
     void deleteShop(@PathVariable("id") Long id){
         shopService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     @ResponseStatus(value = HttpStatus.OK)
     ShopDto updateShop(@RequestBody ShopDto shopDto, @PathVariable("id") Long id){
         ShopDto shopDtoNew = shopService.update(id, shopDto);

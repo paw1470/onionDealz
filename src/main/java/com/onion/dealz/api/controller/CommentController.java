@@ -24,13 +24,6 @@ public class CommentController {
         return commentDtos;
     }
 
-    @PostMapping("/add")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    CommentDto create(@RequestBody CommentDto commentDto){
-        CommentDto commentDtoNew = commentService.create(commentDto);
-        return commentDtoNew;
-    }
-
     @GetMapping("/allByPromotion")
     @ResponseStatus(value = HttpStatus.OK)
     List<CommentDto> allByPromotion(@RequestParam("id") Long id){
@@ -45,26 +38,40 @@ public class CommentController {
         return commentDtos;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    CommentDto getById(@PathVariable("id") Long id){
+        CommentDto commentDto = commentService.getByCommentId(id);
+        return commentDto;
+    }
+
+    @PostMapping("/add")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    CommentDto create(@RequestBody CommentDto commentDto){
+        CommentDto commentDtoNew = commentService.create(commentDto);
+        return commentDtoNew;
+    }
+
+    @DeleteMapping("/{id}/delete")
     @ResponseStatus(value = HttpStatus.OK)
     void deleteComment(@PathVariable("id") Long id){
         commentService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     @ResponseStatus(value = HttpStatus.OK)
     CommentDto updateComment(@RequestBody CommentUpdateDto commentUpdateDto, @PathVariable("id") Long id){
         CommentDto commentDtoNew = commentService.update(id, commentUpdateDto);
         return commentDtoNew;
     }
 
-    @PutMapping("/{id}/like")
+    @PostMapping("/{id}/like")
     @ResponseStatus(value = HttpStatus.OK)
     void like(@PathVariable("id") Long id){
         commentService.addLike(id);
     }
 
-    @PutMapping("/{id}/removelike")
+    @PostMapping("/{id}/removelike")
     @ResponseStatus(value = HttpStatus.OK)
     void removelike(@PathVariable("id") Long id){
         commentService.removeLike(id);
