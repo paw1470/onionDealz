@@ -1,5 +1,6 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.exception.ResourceNotFoundException;
 import com.onion.dealz.api.model.converter.PromotionDtoConverter;
 import com.onion.dealz.api.model.dto.PromotionDto;
 import com.onion.dealz.api.model.entity.Promotion;
@@ -39,13 +40,15 @@ public class PromotionServiceImpl implements PromotionService{
     @Cacheable
     @Override
     public PromotionDto getPromotionById(Long id) {
-        PromotionDto promotionDto = promotionDtoConverter.entityToDto(promotionDao.findById(id));
+        Promotion promotion = getPromotionByIdEntity(id);
+        PromotionDto promotionDto = promotionDtoConverter.entityToDto(promotion);
         return promotionDto;
     }
 
     @Override
     public List<PromotionDto> getAllByUserId(Long id) {
-        List<PromotionDto> promotionDto = promotionDtoConverter.entityToDtoList(promotionDao.findAllByUserId(id));
+        List<Promotion> promotions = promotionDao.findAllByUserId(id);
+        List<PromotionDto> promotionDto = promotionDtoConverter.entityToDtoList(promotions);
         return promotionDto;
 
 
@@ -53,13 +56,15 @@ public class PromotionServiceImpl implements PromotionService{
 
     @Override
     public List<PromotionDto> getAllByShopId(Long id) {
-        List<PromotionDto> promotionDtos = promotionDtoConverter.entityToDtoList(promotionDao.findAllByShopId(id));
+        List<Promotion> promotions = promotionDao.findAllByShopId(id);
+                List<PromotionDto> promotionDtos = promotionDtoConverter.entityToDtoList(promotions);
         return promotionDtos;
     }
 
     @Override
     public List<PromotionDto> getAllByTagId(Long id) {
-        List<PromotionDto> promotionDtos = promotionDtoConverter.entityToDtoList(promotionDao.findAllByTagId(id));
+        List<Promotion> promotions = promotionDao.findAllByTagId(id);
+        List<PromotionDto> promotionDtos = promotionDtoConverter.entityToDtoList(promotions);
         return promotionDtos;
     }
 
@@ -75,13 +80,13 @@ public class PromotionServiceImpl implements PromotionService{
 
     @Override
     public void delete(Long id) {
-        Promotion promotion = promotionDao.findById(id);
+        Promotion promotion = getPromotionByIdEntity(id);
         promotionDao.deletePromotion(promotion);
     }
 
     @Override
     public PromotionDto update(Long id, PromotionDto promotionDto) {
-        Promotion promotion = promotionDao.findById(id);
+        Promotion promotion = getPromotionByIdEntity(id);
         promotion.update(promotionDto);
         promotionDao.updatePromotion(promotion);
         PromotionDto promotionDtoNew = promotionDtoConverter.entityToDto(promotionDao.findById(id));
@@ -91,7 +96,7 @@ public class PromotionServiceImpl implements PromotionService{
     @Override
     public void addLike(Long promotionId, Long userId) {
         User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(promotionId);
+        Promotion promotion = getPromotionByIdEntity(promotionId);
         promotion.addLike(user);
         promotionDao.updatePromotion(promotion);
     }
@@ -99,7 +104,7 @@ public class PromotionServiceImpl implements PromotionService{
     @Override
     public void addUnlike(Long promotionId, Long userId) {
         User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(promotionId);
+        Promotion promotion = getPromotionByIdEntity(promotionId);
         promotion.addUnlike(user);
         promotionDao.updatePromotion(promotion);
     }
@@ -108,7 +113,7 @@ public class PromotionServiceImpl implements PromotionService{
     @Override
     public void removeLike(Long promotionId, Long userId) {
         User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(promotionId);
+        Promotion promotion = getPromotionByIdEntity(promotionId);
         promotion.removeLike(user);
         promotionDao.updatePromotion(promotion);
     }
@@ -116,7 +121,7 @@ public class PromotionServiceImpl implements PromotionService{
     @Override
     public void removeUnlike(Long promotionId, Long userId) {
         User user = userService.getByUserIdEntity(userId);   //todo poprawic jak bedzie autoryzacja
-        Promotion promotion = promotionDao.findById(promotionId);
+        Promotion promotion = getPromotionByIdEntity(promotionId);
         promotion.removeUnlike(user);
         promotionDao.updatePromotion(promotion);
     }
@@ -124,6 +129,8 @@ public class PromotionServiceImpl implements PromotionService{
     @Override
     public Promotion getPromotionByIdEntity(Long id) {
         Promotion promotion = promotionDao.findById(id);
+        if(promotion == null)
+            throw new ResourceNotFoundException();
         return promotion;
     }
 }

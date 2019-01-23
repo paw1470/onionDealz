@@ -1,5 +1,7 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.exception.UserAlreadyExistsException;
+import com.onion.dealz.api.exception.UserNotFoundException;
 import com.onion.dealz.api.model.converter.UserDtoConverter;
 import com.onion.dealz.api.model.dto.*;
 import com.onion.dealz.api.model.entity.User;
@@ -35,7 +37,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto getByUserId(Long id) {
-        UserDto userDtos = userDtoConverter.entityToDto(userDao.findById(id));
+        User user = getByUserIdEntity(id);
+        UserDto userDtos = userDtoConverter.entityToDto(user);
         return userDtos;
     }
 
@@ -48,6 +51,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto create(UserRegistrationDto userRegistrationDto) {
+        User userTest = userDao.findByName(userRegistrationDto.getLogin());
+        if(userTest != null)
+            throw new UserAlreadyExistsException();
         User user = userDtoConverter.dtoRegistrationToEntity(userRegistrationDto);
         user.clearLVL();
         userDao.create(user);
@@ -57,13 +63,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void delete(Long id) {
-        User user = userDao.findById(id);
+        User user = getByUserIdEntity(id);
         userDao.deleteUser(user);
     }
 
     @Override
     public UserDto update(Long id, UserDto userDto) {
-        User user = userDao.findById(id);
+        User user = getByUserIdEntity(id);
         user.update(userDto);
         userDao.updateUser(user);
         UserDto userDtoNew = userDtoConverter.entityToDto(userDao.findById(id));
@@ -72,7 +78,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto updatePassword(Long id, UserPasswordDto userPasswordDto) {
-        User user = userDao.findById(id);
+        User user = getByUserIdEntity(id);
         user.updatePassword(userPasswordDto);
         userDao.updateUser(user);
         UserDto userDtoNew = userDtoConverter.entityToDto(userDao.findById(id));
@@ -83,6 +89,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDto getByUserName(String name) {
         User user = userDao.findByName(name);
+        if(user == null)
+            throw new UserNotFoundException();
         UserDto userDto = userDtoConverter.entityToDto(user);
         return userDto;
     }
@@ -103,7 +111,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getByUserIdEntity(Long id) {
-        return this.userDao.findById(id);
+        User user = userDao.findById(id);
+        if(user == null)
+            throw new UserNotFoundException();
+        return user;
     }
 
 //    @Override

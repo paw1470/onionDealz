@@ -1,5 +1,6 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.exception.ResourceNotFoundException;
 import com.onion.dealz.api.model.converter.ShopDtoConverter;
 import com.onion.dealz.api.model.dto.ShopDto;
 import com.onion.dealz.api.model.entity.Shop;
@@ -27,15 +28,18 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopDto getByShopId(Long id) {
+    public Shop getByShopIdEntity(Long id) {
         Shop shop = shopDao.findById(id);
-        ShopDto shopDto = shopDtoConverter.entityToDto(shop);
-        return shopDto;
+        if(shop == null)
+            throw new ResourceNotFoundException();
+        return shopDao.findById(id);
     }
 
     @Override
-    public Shop getByShopIdEntity(Long id) {
-        return shopDao.findById(id);
+    public ShopDto getByShopId(Long id) {
+        Shop shop = getByShopIdEntity(id);
+        ShopDto shopDto = shopDtoConverter.entityToDto(shop);
+        return shopDto;
     }
 
     @Override
@@ -54,13 +58,13 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void delete(Long id) {
-        Shop shop = shopDao.findById(id);
+        Shop shop = getByShopIdEntity(id);
         shopDao.deleteShop(shop);
     }
 
     @Override
     public ShopDto update(Long id, ShopDto shopDto) {
-        Shop shop = shopDao.findById(id);
+        Shop shop = getByShopIdEntity(id);
         shop.update(shopDto);
         shopDao.updateShop(shop);
         ShopDto shopDtoNew = shopDtoConverter.entityToDto(shopDao.findById(id));
@@ -69,6 +73,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopDto getByShopName(String name) {
-        return shopDtoConverter.entityToDto(shopDao.findByName(name));
+        Shop shop = shopDao.findByName(name);
+        if(shop == null)
+            throw new ResourceNotFoundException();
+        ShopDto shopDto = shopDtoConverter.entityToDto(shop);
+        return shopDto;
     }
 }

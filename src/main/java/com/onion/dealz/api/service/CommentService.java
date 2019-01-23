@@ -2,6 +2,7 @@ package com.onion.dealz.api.service;
 
 import com.onion.dealz.api.model.dto.CommentDto;
 import com.onion.dealz.api.model.dto.CommentUpdateDto;
+import com.onion.dealz.api.model.entity.Comment;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface CommentService {
 
     public void addLike(Long commentId, Long userId);
     public void removeLike(Long commentId, Long userId);
+
+    public Comment getCommentByIdEntity(Long id);
+
 }

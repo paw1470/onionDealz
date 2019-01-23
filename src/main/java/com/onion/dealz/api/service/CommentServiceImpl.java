@@ -1,5 +1,6 @@
 package com.onion.dealz.api.service;
 
+import com.onion.dealz.api.exception.ResourceNotFoundException;
 import com.onion.dealz.api.model.converter.CommentDtoConverter;
 import com.onion.dealz.api.model.dto.CommentDto;
 import com.onion.dealz.api.model.dto.CommentUpdateDto;
@@ -41,7 +42,8 @@ public class CommentServiceImpl implements CommentService{
     @Cacheable
     @Override
     public CommentDto getByCommentId(Long id){
-        CommentDto commentDtoNew = commentDtoConverter.entityToDto(commentDao.findById(id));
+        Comment comment = getCommentByIdEntity(id);
+        CommentDto commentDtoNew = commentDtoConverter.entityToDto(comment);
         return commentDtoNew;
     }
 
@@ -72,13 +74,13 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public void delete(Long id) {
-        Comment comment = commentDao.findById(id);
+        Comment comment = getCommentByIdEntity(id);
         commentDao.deleteComment(comment);
     }
 
     @Override
     public CommentDto update(Long id, CommentUpdateDto commentUpdateDto) {
-        Comment comment = commentDao.findById(id);
+        Comment comment = getCommentByIdEntity(id);
         comment.update(commentUpdateDto);
         commentDao.updateComment(comment);
         CommentDto commentDtoNew = commentDtoConverter.entityToDto(commentDao.findById(comment.getId()));
@@ -88,7 +90,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void addLike(Long commentId, Long userId) {
         User user = userService.getByUserIdEntity(userId); //todo dodac usera jak bedzie autoryzacja
-        Comment comment = commentDao.findById(commentId);
+        Comment comment = getCommentByIdEntity(commentId);
         comment.addLike(user);
         commentDao.updateComment(comment);
     }
@@ -96,9 +98,18 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void removeLike(Long commentId, Long userId) {
         User user = userService.getByUserIdEntity(userId); //todo dodac usera jak bedzie autoryzacja
-        Comment comment = commentDao.findById(commentId);
+        Comment comment = getCommentByIdEntity(commentId);
         comment.removeLike(user);
         commentDao.updateComment(comment);
+    }
+
+    @Override
+    public Comment getCommentByIdEntity(Long id) {
+        Comment comment = commentDao.findById(id);
+        if(comment == null){
+            throw new ResourceNotFoundException();
+        }
+        return comment;
     }
 
 }
